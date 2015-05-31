@@ -15,7 +15,7 @@ contribuir positivamente para o projeto, deixem sempre a criatividade como princ
 buscar soluções que permitam a evolução da sociedade, deixando sempre de lado o que é burocrático, difícil ou qual quer
 coisa do gênero. Eu gosto muito de soluções criativas e inovadoras e acredito que união pode fazer um grande
 espetáculo. Talvez para aqueles que estão se perguntando por que este projeto tem o número 22 no nome, a resposta
-é simples, a primeira versão foi construida em 22 horas, por isso, provavelmente o projeto não irá suprir todas
+é simples, a primeira versão foi construída em 22 horas, por isso, provavelmente o projeto não irá suprir todas
 as necessidades de empresas que estão buscando por uma solução ERP, mas com o apoio da comunidade em pouco tempo
 eu acredito que isso não será mais um problema. Atualmente o sistema conta com cadastro de clientes e produtos, consulta 
 clientes e produtos, gerar movimentações(somente venda) e consulta de movimentações. O interessante para o sistema
