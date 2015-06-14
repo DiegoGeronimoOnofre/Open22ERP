@@ -13,10 +13,11 @@ ser deixada de lado, por isso, eu acredito que com ela é possível fazer coisas
 normalmente não aparecem quando queremos, mas quando menos esperamos, por conta disso, eu espero que todos que pretendem 
 contribuir positivamente para o projeto, deixem sempre a criatividade como principal prioridade, afinal, a cada dia precisamos
 buscar soluções que permitam a evolução da sociedade, deixando sempre de lado o que é burocrático e difícil. Eu gosto muito de soluções criativas e inovadoras e acredito que união pode fazer um grande
-espetáculo. A primeira versão foi construída em 22 horas, por isso, para algumas empresas, provavelmente o projeto não irá suprir todas
-as necessidades, mas com o apoio de outros Desenvolvedores, acredito que isso pode mudar. Atualmente o sistema conta com cadastro de clientes e produtos, consulta 
-clientes e produtos, gerar movimentações(somente venda) e consulta de movimentações. O interessante para o sistema
-atualmente é a adição de controle de estoque, possibilidade de comprar, relatórios e gráficos sobre como
-anda o negócio de empreendedor ou empresário que utiliza o Open22ERP. Conto com a participação de todos
-que querem contribuir positivamente com o projeto e espero que assim o projeto cresça a cada dia sempre
-tendo novas soluções criativas.
+espetáculo. 
+
+Para entrar em contato comigo recomendo que use 
+o perfil do Facebook. O email diego@tecnologiadigital.net
+está desativado e por algum motivo não está sendo possível
+removê-lo.
+
+Perfil Facebook: https://www.facebook.com/diegogeronimoonofre
