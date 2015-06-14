@@ -39,11 +39,16 @@ public class Mov {
     
     private static final Object lock = new Object();
     
-    public static String persistMov(int codCli, java.util.List<MovProd> mpList)
+    public static String persistMov(int codCli, 
+                                    int payMethodCode,
+                                    int movTypeCode,
+                                    java.util.List<MovProd> mpList)
     {
         synchronized ( lock ){
             erpsystem.db.Mov mov = new erpsystem.db.Mov();
             mov.setCod_cli(codCli);
+            mov.setPayMethodCode(payMethodCode);
+            mov.setMovType(movTypeCode);
             final int movCod = MovDB.add(mov);
 
             if ( movCod != -1 ){

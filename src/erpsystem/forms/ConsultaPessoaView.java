@@ -25,8 +25,8 @@
 package erpsystem.forms;
 
 import erpsystem.Util;
-import erpsystem.db.ClientesDB;
-import erpsystem.db.Cliente;
+import erpsystem.db.PessoasDB;
+import erpsystem.db.Pessoa;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
@@ -36,17 +36,17 @@ import javax.swing.table.TableModel;
  *
  * @author Diego
  */
-public class ConsultaClienteView extends javax.swing.JFrame {
+public class ConsultaPessoaView extends javax.swing.JFrame {
 
     /**
-     * Creates new form ConsultaClienteView
+     * Creates new form ConsultaPessoaView
      */
-    public ConsultaClienteView() {
+    public ConsultaPessoaView() {
         initComponents();
         java.awt.Point p = Util.getCenterPoint(this.getWidth(), this.getHeight());
         this.setLocation(p);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Consulta de Clientes");
+        this.setTitle("Consulta de Pessoas");
     }
 
     /**
@@ -59,7 +59,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     private void initComponents() {
 
         btnPesquisar = new javax.swing.JButton();
-        lblCliName = new javax.swing.JLabel();
+        lblPessoa = new javax.swing.JLabel();
         tfdCliName = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblClientes = new javax.swing.JTable();
@@ -78,7 +78,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             }
         });
 
-        lblCliName.setText("Nome do Cliente");
+        lblPessoa.setText("Nome Pessoa");
 
         tfdCliName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -121,7 +121,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblCliName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfdCliName))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisar)
@@ -132,7 +132,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCliName)
+                .addComponent(lblPessoa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdCliName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,12 +167,12 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     final int LOC   = 4;    
     final int TEL   = 5;    
     
-    private void fill(java.util.List<Cliente> cliList)
+    private void fill(java.util.List<Pessoa> cliList)
     {
         TableModel newModel = new XTableModel(cliCols, cliList.size());
         
         for ( int i = 0; i < cliList.size(); i++ ){
-            Cliente cli = cliList.get(i);
+            Pessoa cli = cliList.get(i);
             final int cod = cli.getCodigo();
             
             String nome  = cli.getNome();
@@ -212,7 +212,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     {
         tblClientes.setEnabled(false);
         String cliName = tfdCliName.getText();
-        java.util.List<Cliente> cliList = ClientesDB.findClient(cliName);
+        java.util.List<Pessoa> cliList = PessoasDB.findClient(cliName);
         
         if ( cliList != null )
             fill(cliList);
@@ -254,20 +254,20 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultaClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaPessoaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultaClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaPessoaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultaClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaPessoaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultaClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaPessoaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultaClienteView().setVisible(true);
+                new ConsultaPessoaView().setVisible(true);
             }
         });
     }
@@ -278,7 +278,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCliName;
+    private javax.swing.JLabel lblPessoa;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTextField tfdCliName;
     // End of variables declaration//GEN-END:variables

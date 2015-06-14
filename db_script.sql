@@ -5,18 +5,18 @@
 -- Created: Sun May 17 12:51:44 2015
 -- ----------------------------------------------------------------------------
 
-SET FOREIGN_KEY_CHECKS = 0;;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------------------------------------------------------
 -- Schema db
 -- ----------------------------------------------------------------------------
-DROP SCHEMA IF EXISTS `db` ;
 CREATE SCHEMA IF NOT EXISTS `db` ;
+
 
 -- ----------------------------------------------------------------------------
 -- Table db.clientes
 -- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db`.`clientes` (
+CREATE TABLE IF NOT EXISTS `db`.`pessoas` (
   `codigo` INT(11) NOT NULL,
   `nome` VARCHAR(50) NULL DEFAULT NULL,
   `cpf` VARCHAR(50) NULL DEFAULT NULL,
@@ -28,17 +28,37 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- ----------------------------------------------------------------------------
+-- Table db.formaspagamento
+-- ----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `db`.`formaspagamento` (
+  `codigo` INT(11) NOT NULL PRIMARY KEY,
+  `descricao` VARCHAR(50) NOT NULL,	
+  `limite_value` INT(11) NOT NULL	
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- ----------------------------------------------------------------------------
 -- Table db.mov
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db`.`mov` (
   `codigo` INT(11) NOT NULL,
   `cod_cli` INT(11) NULL DEFAULT NULL,
+  `cod_pay_method` INT(11) NOT NULL,
+  `mov_type` INT(11) NOT NULL,
   `mov_time` BIGINT(8) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `fkcli` (`cod_cli` ASC),
   CONSTRAINT `fkcli`
     FOREIGN KEY (`cod_cli`)
-    REFERENCES `db`.`clientes` (`codigo`))
+    REFERENCES `db`.`pessoas` (`codigo`),
+
+  INDEX `fkpay_method` (`cod_pay_method` ASC),
+  CONSTRAINT `fkpay_method`
+    FOREIGN KEY (`cod_pay_method`)
+    REFERENCES `db`.`formaspagamento` (`codigo`))
+
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
@@ -73,4 +93,21 @@ CREATE TABLE IF NOT EXISTS `db`.`produtos` (
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
-SET FOREIGN_KEY_CHECKS = 1;;
+
+-- ----------------------------------------------------------------------------
+-- Table db.estoque
+-- ----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `db`.`estoque` (
+  `cod_prod` INT(11) NOT NULL,
+  `qt`       INT(11) NOT NULL,
+  PRIMARY KEY (`cod_prod`),
+
+  CONSTRAINT `fk_est_cod_prod`
+    FOREIGN KEY (`cod_prod`)
+    REFERENCES `db`.`produtos` (`codigo`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+SET FOREIGN_KEY_CHECKS = 1;
+

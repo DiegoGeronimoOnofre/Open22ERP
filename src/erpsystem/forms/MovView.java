@@ -26,11 +26,13 @@ package erpsystem.forms;
 
 import erpsystem.Log;
 import erpsystem.Util;
+import erpsystem.db.PayMethod;
+
 import static erpsystem.Util.*;
 import erpsystem.db.MovProd;
 import erpsystem.db.Produto;
-import erpsystem.db.ClientesDB;
-import erpsystem.db.Cliente;
+import erpsystem.db.PessoasDB;
+import erpsystem.db.Pessoa;
 import erpsystem.db.ProdutosDB;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -51,6 +53,12 @@ public class MovView extends javax.swing.JFrame {
     /**
      * Creates new form MovView
      */
+    static final String COMPRA = "Compra";
+    static final String VENDA = "Venda";
+    
+    public static final int COMPRA_VALUE = 1;
+    public static final int VENDA_VALUE = 2;
+    
     public MovView() {
         initComponents();
         
@@ -61,11 +69,39 @@ public class MovView extends javax.swing.JFrame {
         this.setTitle("Gerar Movimentação");
         this.setResizable(false);
         
+        this.cbxPayMethod.setEditable(false);
+        this.cbxPayMethod.setSelectedItem("Selecione");
+
+        this.cbxMovType.setEditable(false);
+        this.cbxMovType.setSelectedItem("Selecione");
+        
+        fillPayMethods();
+        fillMovTypes();
+        
         tfdCodCli.setNextFocusableComponent(tfdCodProd);
         tfdCodProd.setNextFocusableComponent(tfdQt);
         tfdQt.setNextFocusableComponent(tfdCodCli);
     }
 
+    final void fillMovTypes()
+    {
+        this.cbxMovType.removeAllItems();
+        this.cbxMovType.addItem(COMPRA);
+        this.cbxMovType.addItem(VENDA);    
+    }
+    
+    final void fillPayMethods()
+    {
+        cbxPayMethod.removeAllItems();
+        java.util.List<erpsystem.db.PayMethod> pmList = erpsystem.db.PayMethodDB.findAll();
+        final int len = pmList.size();
+        
+        for ( int i = 0; i < len; i++ ){
+            PayMethod pm = pmList.get(i);
+            cbxPayMethod.addItem(pm);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,6 +132,10 @@ public class MovView extends javax.swing.JFrame {
         lblTotal = new javax.swing.JLabel();
         lblValorTotal = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        cbxPayMethod = new javax.swing.JComboBox();
+        lblPayMethod = new javax.swing.JLabel();
+        lblTipo = new javax.swing.JLabel();
+        cbxMovType = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -196,6 +236,14 @@ public class MovView extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        cbxPayMethod.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblPayMethod.setText("Método de Pagamento:");
+
+        lblTipo.setText("Tipo:");
+
+        cbxMovType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,37 +252,6 @@ public class MovView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblQt)
-                                .addGap(8, 8, 8)
-                                .addComponent(tfdQt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblCodCli)
-                                .addComponent(lblProdMov)
-                                .addComponent(lblCodProd)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblCodProd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAdd))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfdCodCli, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFindCli))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfdCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFindProd)))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblProdInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(346, 346, 346)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
-                            .addComponent(lblCliInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -249,7 +266,54 @@ public class MovView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnConcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(6, 6, 6)))
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCodCli)
+                            .addComponent(lblProdMov)
+                            .addComponent(lblCodProd)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblQt)
+                                .addGap(8, 8, 8)
+                                .addComponent(tfdQt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfdCodCli, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFindCli))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfdCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFindProd)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblCodProd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAdd))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(346, 346, 346)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblProdInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(33, 33, 33))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGap(0, 0, Short.MAX_VALUE)
+                                                        .addComponent(lblTipo))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(lblCliInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addGap(58, 58, 58)
+                                                        .addComponent(lblPayMethod)))
+                                                .addGap(4, 4, 4)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(cbxMovType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cbxPayMethod, 0, 187, Short.MAX_VALUE))))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -265,15 +329,24 @@ public class MovView extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(tfdCodCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnFindCli)
-                                .addComponent(lblCliInfo))
+                                .addComponent(lblCliInfo)
+                                .addComponent(cbxPayMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblPayMethod))
                             .addComponent(jLabel1))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCodProd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfdCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFindProd)
-                    .addComponent(lblProdInfo))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCodProd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfdCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFindProd)
+                            .addComponent(lblProdInfo)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxMovType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTipo))))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -300,7 +373,7 @@ public class MovView extends javax.swing.JFrame {
                         .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(395, Short.MAX_VALUE))))
+                        .addContainerGap(389, Short.MAX_VALUE))))
         );
 
         pack();
@@ -424,6 +497,10 @@ public class MovView extends javax.swing.JFrame {
         tfdCodCli.setFocusable(false);
         tfdCodCli.setBackground(Color.lightGray);
         btnFindCli.setEnabled(false);
+        
+        cbxPayMethod.setEnabled(false);        
+        cbxMovType.setEnabled(false);        
+        
         lockCli = true;
     }
     
@@ -433,6 +510,10 @@ public class MovView extends javax.swing.JFrame {
         tfdCodCli.setFocusable(true);
         tfdCodCli.setBackground(Color.white);   
         btnFindCli.setEnabled(true);
+        
+        cbxPayMethod.setEnabled(true);
+        cbxMovType.setEnabled(true);
+        
         lockCli = false;    
     }
     
@@ -495,7 +576,7 @@ public class MovView extends javax.swing.JFrame {
         
         if ( Util.isInt(cs) ){
             int code = Integer.parseInt(cs);
-            Cliente cli = ClientesDB.find(code);
+            Pessoa cli = PessoasDB.find(code);
 
             if ( cli != null )
                 fillCli(cli);
@@ -536,19 +617,19 @@ public class MovView extends javax.swing.JFrame {
         String cod = tfdCodCli.getText().trim();
 
         if ( isEmptyTabProd() ){
-            msg("Para realizar uma venda é necessário ter "
+            msg("Para realizar uma movimentação é necessário ter "
               + "\npelo menos um produto adicionado na tabela.");
             return;
         }
         
         if ( cod.equals("") ){
-            msg("Não foi possível buscar o código do cliente, "
+            msg("Não foi possível buscar o código da pessoa, "
               + "\nreporte este erro ao Desenvolvedor.");
             return;
         }
 
         if (! isInt(cod) ){
-              msg("Código do cliente não é válido. "
+              msg("Código pessoa não é válido. "
               + "\nreporte este erro ao Desenvolvedor.");
               return;
         }
@@ -578,19 +659,49 @@ public class MovView extends javax.swing.JFrame {
         return result;
     }
     
+    private int getPayMethodCode()
+    {
+        return ((PayMethod)cbxPayMethod.getSelectedItem()).getCod();
+    }
+    
+    public static int getMovType(String movType)
+    {
+        String s = movType;
+        
+        if ( s.equals(COMPRA) )
+            return COMPRA_VALUE;
+        else if ( s.equals(VENDA) )
+            return VENDA_VALUE;
+        else{
+            Log.log(new Exception("Problema interno!"));
+            return -1;
+        }        
+    }
+    
+    private int getMovType()
+    {
+        String s = ((String)cbxMovType.getSelectedItem());
+        return MovView.getMovType(s);
+    }
+    
     private void terminateMov()
     {
         TableModel tm = tblProd.getModel();
         java.util.List<MovProd> mpList = getItemList(tm);
         String cod = tfdCodCli.getText();
         int cliCod = Integer.parseInt(cod);
-        String msg = business.Mov.persistMov(cliCod, mpList);
+        int payMethodCode = getPayMethodCode();
+        int movTypeCode = getMovType();
         
-        if ( msg == null ){
-            msg("Nova movimentação gerada com sucesso.");
+        if ( movTypeCode != -1 ){
+            String msg = business.Mov.persistMov(cliCod,payMethodCode, movTypeCode, mpList);
+
+            if ( msg == null ){
+                msg("Nova movimentação gerada com sucesso.");
+            }
+            else
+                msg(msg);
         }
-        else
-            msg(msg);
         //Executar o método abaixo no final.
         initMov();   
     }
@@ -608,7 +719,7 @@ public class MovView extends javax.swing.JFrame {
             public void chosenCode(int code)
             {
                 tfdCodCli.setText(String.valueOf(code));
-                Cliente cli = ClientesDB.find(code);
+                Pessoa cli = PessoasDB.find(code);
                 
                 if ( cli != null )
                     fillCli(cli);
@@ -654,7 +765,7 @@ public class MovView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tfdCodCliKeyTyped
 
-    private void fillCli(Cliente cli)
+    private void fillCli(Pessoa cli)
     {
         lblCliInfo.setText(cli.getSummary());
     }
@@ -669,10 +780,10 @@ public class MovView extends javax.swing.JFrame {
             if ( Util.isInt(s) ){
                 int codCli = Integer.parseInt(s);
 
-                if (! ClientesDB.exists(codCli) )
+                if (! PessoasDB.exists(codCli) )
                     findCli();
                 else{
-                    Cliente cli = ClientesDB.find(codCli);
+                    Pessoa cli = PessoasDB.find(codCli);
                     
                     if ( cli != null ){
                         fillCli(cli);
@@ -785,6 +896,8 @@ public class MovView extends javax.swing.JFrame {
     private javax.swing.JButton btnConcluir;
     private javax.swing.JButton btnFindCli;
     private javax.swing.JButton btnFindProd;
+    private javax.swing.JComboBox cbxMovType;
+    private javax.swing.JComboBox cbxPayMethod;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -792,9 +905,11 @@ public class MovView extends javax.swing.JFrame {
     private javax.swing.JLabel lblCodCli;
     private javax.swing.JLabel lblCodProd;
     private javax.swing.JLabel lblCodProd1;
+    private javax.swing.JLabel lblPayMethod;
     private javax.swing.JLabel lblProdInfo;
     private javax.swing.JLabel lblProdMov;
     private javax.swing.JLabel lblQt;
+    private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblValorTotal;
     private javax.swing.JTable tblProd;

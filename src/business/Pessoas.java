@@ -24,16 +24,16 @@
 
 package business;
 
-import erpsystem.db.PessoaMov;
+import erpsystem.db.PessoasDB;
 
 /**
  *
  * @author Diego
  */
 
-public class ConsultaMov {
-    public static java.util.List<PessoaMov> findClientMov(String clientName)
+public class Pessoas {
+    public static void add(erpsystem.db.Pessoa cli)
     {
-        return erpsystem.db.MovDB.findClientMov(clientName);
+        PessoasDB.add(cli);
     }
 }

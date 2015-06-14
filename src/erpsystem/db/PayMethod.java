@@ -21,80 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package erpsystem.db;
 
 /**
  *
  * @author Diego
  */
-public class Cliente {
-    private int codigo;
+public class PayMethod {
+    private int cod;
     
-    private String nome;
+    private String descricao;
     
-    private String cpf;
-    
-    private String email;
-    
-    private String localizacao;
-    
-    private String telefone;
-    
-    
+    private int limite;
 
-    public int getCodigo() {
-        return codigo;
+    public int getCod() {
+        return cod;
     }
 
-    public String getNome() {
-        return nome;
+    public void setCod(int cod) {
+        this.cod = cod;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public String getEmail() {
-        return email;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getLocalizacao() {
-        return localizacao;
+    public int getLimite() {
+        return limite;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    
-    
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setLimite(int limite) {
+        this.limite = limite;
     }
     
-    public String getSummary()
+    @Override
+    public String toString()
     {
-        return "Cliente:'" + nome + "' CPF:'" + cpf + "'";
+        return descricao.trim();
     }
 }

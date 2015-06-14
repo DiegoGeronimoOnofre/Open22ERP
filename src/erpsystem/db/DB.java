@@ -48,7 +48,7 @@ public class DB {
         try{
             
             if ( con == null ){
-                con = DriverManager.getConnection( "jdbc:mysql://localhost/dados", 
+                con = DriverManager.getConnection( "jdbc:mysql://192.168.1.2/db", 
                                                     "root", 
                                                     "admin" );
                 con.setAutoCommit(false);

@@ -210,7 +210,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblClient">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nome do Cliente"/>
+        <Property name="text" type="java.lang.String" value="Nome Pessoa"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTotal">

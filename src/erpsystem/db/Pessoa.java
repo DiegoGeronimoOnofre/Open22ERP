@@ -28,46 +28,73 @@ package erpsystem.db;
  *
  * @author Diego
  */
-public class Mov {
-
+public class Pessoa {
     private int codigo;
     
-    private int cod_cli;
+    private String nome;
     
-    private int payMethodCode;
+    private String cpf;
     
-    private int movType;
+    private String email;
+    
+    private String localizacao;
+    
+    private String telefone;
+    
+    
 
     public int getCodigo() {
         return codigo;
     }
 
-    public int getCod_cli() {
-        return cod_cli;
+    public String getNome() {
+        return nome;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    
+    
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
-    public void setCod_cli(int cod_cli) {
-        this.cod_cli = cod_cli;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public int getPayMethodCode() {
-        return payMethodCode;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public void setPayMethodCode(int payMethodCode) {
-        this.payMethodCode = payMethodCode;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getMovType() {
-        return movType;
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
     }
 
-    public void setMovType(int movType) {
-        this.movType = movType;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
     
+    public String getSummary()
+    {
+        return "Cliente:'" + nome + "' CPF:'" + cpf + "'";
+    }
 }

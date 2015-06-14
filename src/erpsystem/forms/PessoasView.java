@@ -26,25 +26,25 @@ package erpsystem.forms;
 
 import erpsystem.Util;
 import static erpsystem.Util.*;
-import erpsystem.db.Cliente;
+import erpsystem.db.Pessoa;
 import javax.swing.JFrame;
 
 /**
  *
  * @author Diego
  */
-public class ClientesView extends javax.swing.JFrame {
+public class PessoasView extends javax.swing.JFrame {
 
     /**
-     * Creates new form ClientesView
+     * Creates new form PessoaView
      */
-    public ClientesView() {
+    public PessoasView() {
         initComponents();
         java.awt.Point p = Util.getCenterPoint(this.getWidth(), this.getHeight());
         this.setLocation(p);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Cadastro de Clientes");
+        this.setTitle("Cadastro de Pessoas");
     }
 
     /**
@@ -146,35 +146,35 @@ public class ClientesView extends javax.swing.JFrame {
     {
         if ( tfdNome.getText().trim().equals("") )
         {
-            msg("Por favor, informe o nome do cliente.");
+            msg("Por favor, informe o nome da pessoa.");
             tfdNome.grabFocus();
             return false;
         }
         
         if ( tfdCpf.getText().trim().equals("") )
         {
-            msg("Por favor, informe o CPF do cliente.");
+            msg("Por favor, informe o CPF da pessoa.");
             tfdCpf.grabFocus();
             return false;        
         }
         
         if ( tfdEmail.getText().trim().equals("") )
         {
-            msg("Por favor, informe o email do cliente.");
+            msg("Por favor, informe o email da pessoa.");
             tfdEmail.grabFocus();
             return false;        
         }
         
         if ( tfdLoc.getText().trim().equals("") )
         {
-            msg("Por favor, informe a localização do cliente.");
+            msg("Por favor, informe a localização da pessoa.");
             tfdLoc.grabFocus();
             return false;        
         }
         
         if ( tfdTel.getText().trim().equals("") )
         {
-            msg("Por favor, informe o telefone do cliente.");
+            msg("Por favor, informe o telefone da pessoa.");
             tfdTel.grabFocus();
             return false;        
         }
@@ -186,7 +186,7 @@ public class ClientesView extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         if ( validateFields() ){
-            Cliente cli = new Cliente();
+            Pessoa cli = new Pessoa();
 
             String nome = tfdNome.getText();
             String cpf = tfdCpf.getText();
@@ -199,7 +199,7 @@ public class ClientesView extends javax.swing.JFrame {
             cli.setEmail(email);
             cli.setLocalizacao(loc);
             cli.setTelefone(tel);
-            business.Clientes.add(cli);
+            business.Pessoas.add(cli);
         }
     }//GEN-LAST:event_btnCadActionPerformed
 
@@ -220,20 +220,20 @@ public class ClientesView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClientesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PessoasView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClientesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PessoasView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClientesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PessoasView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClientesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PessoasView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClientesView().setVisible(true);
+                new PessoasView().setVisible(true);
             }
         });
     }

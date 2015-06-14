@@ -30,7 +30,6 @@ import erpsystem.Util;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URLClassLoader;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -64,12 +63,13 @@ public class MainFormView extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         mniFunctions = new javax.swing.JMenu();
-        mniCadCli = new javax.swing.JMenuItem();
+        mniCadPessoa = new javax.swing.JMenuItem();
         mniCadProd = new javax.swing.JMenuItem();
         mniGenMov = new javax.swing.JMenuItem();
         mniFindMov = new javax.swing.JMenuItem();
-        mniFindCli = new javax.swing.JMenuItem();
+        mniFindPessoa = new javax.swing.JMenuItem();
         mniFindProd = new javax.swing.JMenuItem();
+        mniPayMethod = new javax.swing.JMenuItem();
         mniAjuda = new javax.swing.JMenu();
         mniSobre = new javax.swing.JMenuItem();
         mniProjectLink = new javax.swing.JMenuItem();
@@ -79,13 +79,13 @@ public class MainFormView extends javax.swing.JFrame {
 
         mniFunctions.setText("Funções");
 
-        mniCadCli.setText("Cadastrar Clientes");
-        mniCadCli.addActionListener(new java.awt.event.ActionListener() {
+        mniCadPessoa.setText("Cadastrar Pessoas");
+        mniCadPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniCadCliActionPerformed(evt);
+                mniCadPessoaActionPerformed(evt);
             }
         });
-        mniFunctions.add(mniCadCli);
+        mniFunctions.add(mniCadPessoa);
 
         mniCadProd.setText("Cadastrar Produtos");
         mniCadProd.addActionListener(new java.awt.event.ActionListener() {
@@ -111,13 +111,13 @@ public class MainFormView extends javax.swing.JFrame {
         });
         mniFunctions.add(mniFindMov);
 
-        mniFindCli.setText("Consulta Clientes");
-        mniFindCli.addActionListener(new java.awt.event.ActionListener() {
+        mniFindPessoa.setText("Consulta Pessoas");
+        mniFindPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFindCliActionPerformed(evt);
+                mniFindPessoaActionPerformed(evt);
             }
         });
-        mniFunctions.add(mniFindCli);
+        mniFunctions.add(mniFindPessoa);
 
         mniFindProd.setText("Consulta Produtos");
         mniFindProd.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +126,14 @@ public class MainFormView extends javax.swing.JFrame {
             }
         });
         mniFunctions.add(mniFindProd);
+
+        mniPayMethod.setText("Formas de Pagamento");
+        mniPayMethod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPayMethodActionPerformed(evt);
+            }
+        });
+        mniFunctions.add(mniPayMethod);
 
         jMenuBar1.add(mniFunctions);
 
@@ -173,11 +181,11 @@ public class MainFormView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mniCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadCliActionPerformed
+    private void mniCadPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadPessoaActionPerformed
         // TODO add your handling code here:
-        ClientesView form = new ClientesView();
+        PessoasView form = new PessoasView();
         form.setVisible(true);
-    }//GEN-LAST:event_mniCadCliActionPerformed
+    }//GEN-LAST:event_mniCadPessoaActionPerformed
 
     private void mniCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadProdActionPerformed
         // TODO add your handling code here:
@@ -197,11 +205,11 @@ public class MainFormView extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_mniFindMovActionPerformed
 
-    private void mniFindCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFindCliActionPerformed
+    private void mniFindPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFindPessoaActionPerformed
         // TODO add your handling code here:
-        ConsultaClienteView form = new ConsultaClienteView();
+        ConsultaPessoaView form = new ConsultaPessoaView();
         form.setVisible(true);        
-    }//GEN-LAST:event_mniFindCliActionPerformed
+    }//GEN-LAST:event_mniFindPessoaActionPerformed
 
     private void mniFindProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFindProdActionPerformed
         // TODO add your handling code here:
@@ -278,6 +286,13 @@ public class MainFormView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mniSiteActionPerformed
 
+    private void mniPayMethodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPayMethodActionPerformed
+        // TODO add your handling code here:
+        
+        PayMethodView view = new PayMethodView(this, true);
+        view.setVisible(true);
+    }//GEN-LAST:event_mniPayMethodActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -316,13 +331,14 @@ public class MainFormView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mniAjuda;
-    private javax.swing.JMenuItem mniCadCli;
+    private javax.swing.JMenuItem mniCadPessoa;
     private javax.swing.JMenuItem mniCadProd;
-    private javax.swing.JMenuItem mniFindCli;
     private javax.swing.JMenuItem mniFindMov;
+    private javax.swing.JMenuItem mniFindPessoa;
     private javax.swing.JMenuItem mniFindProd;
     private javax.swing.JMenu mniFunctions;
     private javax.swing.JMenuItem mniGenMov;
+    private javax.swing.JMenuItem mniPayMethod;
     private javax.swing.JMenuItem mniProjectLink;
     private javax.swing.JMenuItem mniSite;
     private javax.swing.JMenuItem mniSobre;

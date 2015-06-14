@@ -28,7 +28,7 @@ package erpsystem.forms;
  *
  * @author Diego
  */
-public abstract class XConsultaClienteView extends ConsultaClienteView{
+public abstract class XConsultaClienteView extends ConsultaPessoaView{
     @Override
     public void afterConstruct()
     {

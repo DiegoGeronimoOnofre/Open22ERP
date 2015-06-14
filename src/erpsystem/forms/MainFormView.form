@@ -9,12 +9,12 @@
             <Property name="text" type="java.lang.String" value="Fun&#xe7;&#xf5;es"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mniCadCli">
+            <MenuItem class="javax.swing.JMenuItem" name="mniCadPessoa">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastrar Clientes"/>
+                <Property name="text" type="java.lang.String" value="Cadastrar Pessoas"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniCadCliActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniCadPessoaActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniCadProd">
@@ -41,12 +41,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniFindMovActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mniFindCli">
+            <MenuItem class="javax.swing.JMenuItem" name="mniFindPessoa">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Consulta Clientes"/>
+                <Property name="text" type="java.lang.String" value="Consulta Pessoas"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniFindCliActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniFindPessoaActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniFindProd">
@@ -55,6 +55,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniFindProdActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mniPayMethod">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Formas de Pagamento"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniPayMethodActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

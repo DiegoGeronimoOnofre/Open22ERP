@@ -35,13 +35,13 @@ import java.util.List;
  *
  * @author Diego
  */
-public class ClientesDB {
+public class PessoasDB {
     public static int genCode()
     {
         try{
             Connection con = DB.getConnection();
             Statement st = con.createStatement();
-            String update = "select max(codigo) as 'cod' from clientes";
+            String update = "select max(codigo) as 'cod' from pessoas";
             ResultSet rs = st.executeQuery(update);
             rs.next();
             return rs.getInt("cod") + 1;
@@ -52,7 +52,7 @@ public class ClientesDB {
         }
     }
     
-    public static void add(Cliente cli)
+    public static void add(Pessoa cli)
     {
         try{
             Connection con = DB.getConnection();
@@ -66,7 +66,7 @@ public class ClientesDB {
             String tel   = cli.getTelefone();
             
             String update = " insert "
-                          + " into clientes "
+                          + " into pessoas "
                           + " values(" + cod + ","
                                     + "'" + nome + "',"
                                     + "'" + cpf + "',"
@@ -84,22 +84,22 @@ public class ClientesDB {
         }
     }
     
-    public static List<Cliente> findClient(String clientName)
+    public static List<Pessoa> findClient(String clientName)
     {
         try{
             Connection con = DB.getConnection();
             Statement st = con.createStatement();
-            String update = " select clientes.codigo as 'cod',"
-                          + "        clientes.nome as 'nome',"
-                          + "        clientes.cpf as 'cpf',"
-                          + "        clientes.email as 'email',"
-                          + "        clientes.localizacao as 'loc',"
-                          + "        clientes.telefone as 'tel'"
-                          + " from clientes "
-                          + " where upper(trim(clientes.nome)) like '%" + clientName.trim().toUpperCase() + "%'";
+            String update = " select pessoas.codigo as 'cod',"
+                          + "        pessoas.nome as 'nome',"
+                          + "        pessoas.cpf as 'cpf',"
+                          + "        pessoas.email as 'email',"
+                          + "        pessoas.localizacao as 'loc',"
+                          + "        pessoas.telefone as 'tel'"
+                          + " from pessoas "
+                          + " where upper(trim(pessoas.nome)) like '%" + clientName.trim().toUpperCase() + "%'";
             
             ResultSet rs = st.executeQuery(update);
-            List<Cliente> cliList = new ArrayList<>();
+            List<Pessoa> cliList = new ArrayList<>();
             
             while (rs.next()){
                 final int cod  = rs.getInt("cod");
@@ -110,7 +110,7 @@ public class ClientesDB {
                 String loc     = rs.getString("loc");
                 String tel     = rs.getString("tel");
                 
-                Cliente cli = new Cliente();
+                Pessoa cli = new Pessoa();
                 
                 cli.setCodigo(cod);
                 cli.setNome(cliName);
@@ -136,7 +136,7 @@ public class ClientesDB {
             Connection con = DB.getConnection();
             Statement st = con.createStatement();
             String update = " select codigo as 'cod' "
-                          + " from clientes "
+                          + " from pessoas "
                           + " where codigo = " + code;
             ResultSet rs = st.executeQuery(update);
             
@@ -151,18 +151,18 @@ public class ClientesDB {
         }        
     }
 
-    public static Cliente find(int code)
+    public static Pessoa find(int code)
     {
         try{
             Connection con = DB.getConnection();
             Statement st = con.createStatement();
-            String update = " select clientes.codigo as 'cod',"
-                          + "        clientes.nome as 'nome',"
-                          + "        clientes.cpf as 'cpf',"
-                          + "        clientes.email as 'email',"
-                          + "        clientes.localizacao as 'loc',"
-                          + "        clientes.telefone as 'tel'"
-                          + " from clientes "
+            String update = " select pessoas.codigo as 'cod',"
+                          + "        pessoas.nome as 'nome',"
+                          + "        pessoas.cpf as 'cpf',"
+                          + "        pessoas.email as 'email',"
+                          + "        pessoas.localizacao as 'loc',"
+                          + "        pessoas.telefone as 'tel'"
+                          + " from pessoas "
                           + " where codigo = " + code;
             ResultSet rs = st.executeQuery(update);
             
@@ -175,7 +175,7 @@ public class ClientesDB {
                 String loc     = rs.getString("loc");
                 String tel     = rs.getString("tel");
 
-                Cliente cli = new Cliente();
+                Pessoa cli = new Pessoa();
 
                 cli.setCodigo(cod);
                 cli.setNome(cliName);

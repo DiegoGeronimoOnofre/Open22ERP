@@ -62,12 +62,16 @@ public class MovDB {
             
             final int cod    = genCode();
             final int codCli = mov.getCod_cli();
-            long time        = System.currentTimeMillis();
+            final int codPayMethod = mov.getPayMethodCode();
+            final int movTypeCode  = mov.getMovType();
+            long time = System.currentTimeMillis();
             
             String update = " insert "
                           + " into mov "
                           + " values(" + cod + ","
                                        + codCli + ","
+                                       + codPayMethod + ","
+                                       + movTypeCode + ","
                                        + time
                           + ")";
             
@@ -82,30 +86,37 @@ public class MovDB {
         }
     }
     
-    public static List<ClientMov> findClientMov(String clientName)
+    public static List<PessoaMov> findClientMov(String pessoa)
     {
         try{
             Connection con = DB.getConnection();
             Statement st = con.createStatement();
-            String update = " select mov.codigo        as 'codmov',"
+            String update = " select mov.codigo   as 'codmov',"
                           + "        mov.mov_time as 'mov_time',"
-                          + "        clientes.nome     as 'nome'"
-                          + " from mov, clientes "
-                          + " where mov.cod_cli = clientes.codigo "
-                          + "   and upper(trim(clientes.nome)) like '%" + clientName.trim().toUpperCase() + "%'";
+                          + "        pessoas.nome as 'nome',"
+                          + "        mov.mov_type as 'mov_type',"
+                          + "        mov.cod_pay_method as 'paym'"
+                          + " from mov, pessoas "
+                          + " where mov.cod_cli = pessoas.codigo "
+                          + "   and upper(trim(pessoas.nome)) like '%" + pessoa.trim().toUpperCase() + "%'";
             
             ResultSet rs = st.executeQuery(update);
-            List<ClientMov> cmList = new ArrayList<>();
+            List<PessoaMov> cmList = new ArrayList<>();
             
             while (rs.next()){
                 final int movCod = rs.getInt("codmov");
                 long movTime = rs.getLong("mov_time");
                 String cliName = rs.getString("nome");
                 
-                ClientMov cm = new ClientMov();
+                int type = rs.getInt("mov_type");
+                int pm = rs.getInt("paym");
+                
+                PessoaMov cm = new PessoaMov();
                 cm.setMovCod(movCod);
                 cm.setData(new Date(movTime));
                 cm.setClientName(cliName);
+                cm.setType(type);
+                cm.setPayMethod(pm);
                 cmList.add(cm);
             }
             

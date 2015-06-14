@@ -22,19 +22,69 @@
  * THE SOFTWARE.
  */
 
-package business;
+package erpsystem.db;
 
-import erpsystem.db.ClientesDB;
-import erpsystem.db.Cliente;
+import java.sql.Date;
 
 /**
  *
  * @author Diego
  */
 
-public class Clientes {
-    public static void add(Cliente cli)
-    {
-        ClientesDB.add(cli);
+public class PessoaMov {
+    
+    private int movCod;
+    
+    private String clientName;
+    
+    private Date data;
+
+    private int type;
+    
+    private int payMethod;
+    
+    public int getMovCod() {
+        return movCod;
     }
+
+    public String getClientName() {
+        return clientName;
+    }
+    
+
+    public void setMovCod(int movCod) {
+        this.movCod = movCod;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getPayMethod() {
+        return payMethod;
+    }
+
+    public void setPayMethod(int payMethod) {
+        this.payMethod = payMethod;
+    }
+    
+    
+    
+    
 }

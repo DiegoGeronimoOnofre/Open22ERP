@@ -24,8 +24,9 @@
 
 package erpsystem.forms;
 
+import erpsystem.Log;
 import erpsystem.Util;
-import erpsystem.db.ClientMov;
+import erpsystem.db.PessoaMov;
 import erpsystem.db.MovProd;
 import erpsystem.db.MovProdDB;
 import java.awt.event.KeyEvent;
@@ -50,6 +51,7 @@ public class ConsultaMovView extends javax.swing.JFrame {
         this.setLocation(p);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Consulta Movimentações");
+        
     }
 
     /**
@@ -142,7 +144,7 @@ public class ConsultaMovView extends javax.swing.JFrame {
             }
         });
 
-        lblClient.setText("Nome do Cliente");
+        lblClient.setText("Nome Pessoa");
 
         lblTotal.setText("Total Geral:");
 
@@ -206,16 +208,18 @@ public class ConsultaMovView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private final static Object[] colMovs = new Object[]{"Código",
+                                                         "Nome Pessoa",
+                                                         "Tipo",
+                                                         "Forma Pag.",
                                                          "Data",
-                                                         "Hora",
-                                                         "Nome do Cliente"
+                                                         "Hora"
                                                          };
         
     private final static Object[] colProds = new Object[]{"Código",
                                                           "Descrição",
                                                           "Quantidade",
-                                                          "Valor Unit",
-                                                          "Total",
+                                                          "Valor Unit R$",
+                                                          "Total R$",
                                         };
     
     final TableModel emptyMovsModel = new XTableModel(new Object[0][colMovs.length], colMovs);
@@ -230,7 +234,7 @@ public class ConsultaMovView extends javax.swing.JFrame {
 
     private void initObjects()
     {
-        lblValorTotal.setText("R$ 0.00");
+        lblValorTotal.setText("R$ 0.00"); 
     }
     
     private void calcTotalValue()
@@ -246,12 +250,12 @@ public class ConsultaMovView extends javax.swing.JFrame {
         lblValorTotal.setText("R$ " + totalValue);
     }
     
-    private void fillMovs(java.util.List<ClientMov> cmList)
+    private void fillMovs(java.util.List<PessoaMov> cmList)
     {
         TableModel newModel = new XTableModel(colMovs, cmList.size());
         
         for ( int i = 0; i < cmList.size(); i++ ){
-            ClientMov cm = cmList.get(i);
+            PessoaMov cm = cmList.get(i);
             
             final int movCod  = cm.getMovCod();
             
@@ -282,7 +286,7 @@ public class ConsultaMovView extends javax.swing.JFrame {
             //Formatando a hora como hh/mm/ss
             final int minute  = calendar.get(Calendar.MINUTE);
             final int second  = calendar.get(Calendar.SECOND);
-            final int hour    = calendar.get(Calendar.HOUR);
+            final int hour    = calendar.get(Calendar.HOUR_OF_DAY);
             
             String hora       = ( hour   <= 9 ? "0" + hour   : hour   ) + ":" 
                               + ( minute <= 9 ? "0" + minute : minute ) + ":" 
@@ -296,19 +300,36 @@ public class ConsultaMovView extends javax.swing.JFrame {
             
             String clientName = cm.getClientName();
             
-            final int MOV_COD = 0;
-            final int DATA = 1;
-            final int HORA = 2;
-            final int CLIENT_NAME = 3;
+            final int type = cm.getType();
+            final int payMethod = cm.getPayMethod();
             
-            newModel.setValueAt(movCod, i, MOV_COD);
-            newModel.setValueAt(data, i, DATA);
-            newModel.setValueAt(hora, i, HORA);
-            newModel.setValueAt(clientName, i, CLIENT_NAME);
+            erpsystem.db.PayMethod payMethodObj = erpsystem.db.PayMethodDB.find(payMethod);
+            
+            if (payMethodObj != null){
+                String payMethodValue = payMethodObj.getDescricao();
+
+                newModel.setValueAt(movCod, i, MOV_COD);
+                newModel.setValueAt(clientName, i, CLIENT_NAME);
+                newModel.setValueAt((type == MovView.COMPRA_VALUE?MovView.COMPRA:MovView.VENDA), i, TYPE);
+                newModel.setValueAt(payMethodValue, i, PAY_METHOD);
+                newModel.setValueAt(data, i, DATA);
+                newModel.setValueAt(hora, i, HORA);
+            }
+            else
+                Log.log(new Exception("Problema 5448"));
         }
         
         tblMovs.setModel(newModel);
+        tblMovs.getColumnModel().getColumn(0).setMinWidth(0);  
+        tblMovs.getColumnModel().getColumn(0).setMaxWidth(0);
     }
+    
+    static final int MOV_COD = 0;
+    static final int CLIENT_NAME = 1;
+    static final int TYPE = 2;
+    static final int PAY_METHOD = 3;
+    static final int DATA = 4;
+    static final int HORA = 5;    
 
     private void fillProds(java.util.List<MovProd> mpList)
     {
@@ -341,7 +362,7 @@ public class ConsultaMovView extends javax.swing.JFrame {
     {
         initTabs();
         String clientName = tfdClient.getText();
-        java.util.List<erpsystem.db.ClientMov> cmList = business.ConsultaMov.findClientMov(clientName);
+        java.util.List<erpsystem.db.PessoaMov> cmList = business.ConsultaMov.findClientMov(clientName);
         
         if ( cmList != null )
             fillMovs(cmList);
@@ -387,6 +408,9 @@ public class ConsultaMovView extends javax.swing.JFrame {
         //Evitando seleção múltipla
         tblMovs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
         tblMovs.setModel(emptyMovsModel);
+        
+        tblMovs.getColumnModel().getColumn(0).setMinWidth(0);  
+        tblMovs.getColumnModel().getColumn(0).setMaxWidth(0);
     }
     
     private void initTblProds()
