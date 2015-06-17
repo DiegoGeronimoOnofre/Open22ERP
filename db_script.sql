@@ -89,7 +89,8 @@ CREATE TABLE IF NOT EXISTS `db`.`produtos` (
   `codigo` INT(11) NOT NULL,
   `cod_barras` VARCHAR(30) NULL DEFAULT NULL,
   `descricao` VARCHAR(50) NULL DEFAULT NULL,
-  `preco` DOUBLE(6,2) NULL DEFAULT NULL,
+  `preco_compra` DOUBLE(6,2) NULL DEFAULT NULL,
+  `preco_venda` DOUBLE(6,2) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;

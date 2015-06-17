@@ -48,6 +48,9 @@ public class EstoqueView extends javax.swing.JDialog {
         java.awt.Point p = Util.getCenterPoint(this.getWidth(), this.getHeight());
         this.setLocation(p);      
         this.setResizable(false);
+        
+        tfdQt.setToolTipText("Exemplo: +50 ou -50");
+        tfdQt.setText("+1");
     }
 
     /**

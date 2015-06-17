@@ -120,7 +120,7 @@ public class EstoqueDB {
             Connection con = DB.getConnection();
             Statement st = con.createStatement();
             String update = " select estoque.cod_prod as 'cod',"
-                          + "        estoque.qt       as 'qt',"
+                          + "        estoque.qt       as 'qt'"
                           + " from estoque "
                           + " where estoque.cod_prod = " + code;
             
