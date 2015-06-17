@@ -47,9 +47,9 @@ public class ERPSystem {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFormView().setVisible(true);
+                new MainFormView().setVisible(true);               
             }
-        });
+        });    
     }
     
 }

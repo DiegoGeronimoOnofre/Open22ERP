@@ -24,6 +24,7 @@
 
 package erpsystem.forms;
 
+import chartforms.ChartForm001;
 import erpsystem.ERPSystem;
 import erpsystem.Log;
 import erpsystem.Util;
@@ -70,6 +71,8 @@ public class MainFormView extends javax.swing.JFrame {
         mniFindPessoa = new javax.swing.JMenuItem();
         mniFindProd = new javax.swing.JMenuItem();
         mniPayMethod = new javax.swing.JMenuItem();
+        mniCharts = new javax.swing.JMenu();
+        mniFaturamento = new javax.swing.JMenuItem();
         mniAjuda = new javax.swing.JMenu();
         mniSobre = new javax.swing.JMenuItem();
         mniProjectLink = new javax.swing.JMenuItem();
@@ -137,6 +140,18 @@ public class MainFormView extends javax.swing.JFrame {
 
         jMenuBar1.add(mniFunctions);
 
+        mniCharts.setText("Gráficos");
+
+        mniFaturamento.setText("Faturamento");
+        mniFaturamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniFaturamentoActionPerformed(evt);
+            }
+        });
+        mniCharts.add(mniFaturamento);
+
+        jMenuBar1.add(mniCharts);
+
         mniAjuda.setText("Ajuda");
 
         mniSobre.setText("Sobre");
@@ -175,7 +190,7 @@ public class MainFormView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 281, Short.MAX_VALUE)
         );
 
         pack();
@@ -293,6 +308,12 @@ public class MainFormView extends javax.swing.JFrame {
         view.setVisible(true);
     }//GEN-LAST:event_mniPayMethodActionPerformed
 
+    private void mniFaturamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFaturamentoActionPerformed
+        // TODO add your handling code here:
+        ChartForm001 chart = new ChartForm001();
+        chart.createAndShow();
+    }//GEN-LAST:event_mniFaturamentoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -333,6 +354,8 @@ public class MainFormView extends javax.swing.JFrame {
     private javax.swing.JMenu mniAjuda;
     private javax.swing.JMenuItem mniCadPessoa;
     private javax.swing.JMenuItem mniCadProd;
+    private javax.swing.JMenu mniCharts;
+    private javax.swing.JMenuItem mniFaturamento;
     private javax.swing.JMenuItem mniFindMov;
     private javax.swing.JMenuItem mniFindPessoa;
     private javax.swing.JMenuItem mniFindProd;
