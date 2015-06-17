@@ -53,7 +53,13 @@ public class ProdutosDB{
         }
     }
     
-    public static void add(Produto prod)
+    /**
+     * Este método injeta o código do produto
+     * no objeto passado como parâmetro "Produto"
+     * depois que tem certeza que o produto foi cadastrado.
+     */
+    
+    public static boolean add(Produto prod)
     {
         try{
             Connection con = DB.getConnection();
@@ -74,9 +80,12 @@ public class ProdutosDB{
             
             st.executeUpdate(update);
             con.commit();
+            prod.setCodigo(cod);
+            return true;
         }
         catch ( Exception e ){
             Log.log(e);
+            return false;
         }
     }
     

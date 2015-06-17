@@ -32,8 +32,8 @@ import erpsystem.db.PessoasDB;
  */
 
 public class Pessoas {
-    public static void add(erpsystem.db.Pessoa cli)
+    public static boolean add(erpsystem.db.Pessoa cli)
     {
-        PessoasDB.add(cli);
+        return PessoasDB.add(cli);
     }
 }

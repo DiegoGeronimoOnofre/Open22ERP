@@ -25,6 +25,7 @@ package chartforms;
 
 import erpsystem.chart.Chart001;
 import java.awt.image.BufferedImage;
+import java.util.Calendar;
 
 /**
  *
@@ -40,9 +41,18 @@ public class ChartForm001 extends ChartForm{
     {
         final int w = 1024;
         final int h = 768;
-        double compra = 1000;
-        double venda = 1800;
-        double lucro = 800;
+        
+        final int y = 2015;
+        final int m = 5; // O primeiro mês começa com 0, o segundo com 1...
+        final int d = 1;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(y, m, d);
+        long initialDate = calendar.getTime().getTime();
+        long finalDate = System.currentTimeMillis();
+        
+        double compra = erpsystem.db.chart.Chart001.getValorCompraEm(initialDate, finalDate);
+        double venda = erpsystem.db.chart.Chart001.getValorVendaEm(initialDate, finalDate);
+        double lucro = erpsystem.db.chart.Chart001.getValorLucroEm(initialDate, finalDate);
         BufferedImage image = Chart001.create001(w, h, compra, venda, lucro);
         showChart(w, h, image);
     }

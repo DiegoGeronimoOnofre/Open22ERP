@@ -32,9 +32,9 @@ import erpsystem.db.Produto;
  * @author Diego
  */
 public class Produtos {
-    public static void add(erpsystem.db.Produto prod)
+    public static boolean add(erpsystem.db.Produto prod)
     {
-        ProdutosDB.add(prod);
+        return ProdutosDB.add(prod);
     }
     
     public static Produto find( int cod )

@@ -182,6 +182,15 @@ public class PessoasView extends javax.swing.JFrame {
         return true;
     }
     
+    private void clearFields()
+    {
+        tfdNome.setText("");
+        tfdCpf.setText("");
+        tfdEmail.setText("");
+        tfdLoc.setText("");
+        tfdTel.setText("");
+    }
+    
     private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadActionPerformed
         // TODO add your handling code here:
         
@@ -199,7 +208,16 @@ public class PessoasView extends javax.swing.JFrame {
             cli.setEmail(email);
             cli.setLocalizacao(loc);
             cli.setTelefone(tel);
-            business.Pessoas.add(cli);
+            boolean result = business.Pessoas.add(cli);
+            
+            if ( result ){
+                msg("Nova pessoa cadastrada com sucesso.");
+                clearFields();
+            }
+            else
+                msg("Problema ao cadastrar a nova pessoa.\n"
+                  + "Recomendável tentar novamente, se o problema \n"
+                  + "persistir informe o desenvolvedor.");
         }
     }//GEN-LAST:event_btnCadActionPerformed
 

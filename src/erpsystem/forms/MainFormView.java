@@ -63,14 +63,16 @@ public class MainFormView extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        mniFunctions = new javax.swing.JMenu();
+        mniCadastros = new javax.swing.JMenu();
         mniCadPessoa = new javax.swing.JMenuItem();
         mniCadProd = new javax.swing.JMenuItem();
         mniGenMov = new javax.swing.JMenuItem();
+        mniPayMethod = new javax.swing.JMenuItem();
+        mniCadEstoque = new javax.swing.JMenuItem();
+        mniConsultas = new javax.swing.JMenu();
         mniFindMov = new javax.swing.JMenuItem();
         mniFindPessoa = new javax.swing.JMenuItem();
         mniFindProd = new javax.swing.JMenuItem();
-        mniPayMethod = new javax.swing.JMenuItem();
         mniCharts = new javax.swing.JMenu();
         mniFaturamento = new javax.swing.JMenuItem();
         mniAjuda = new javax.swing.JMenu();
@@ -80,65 +82,77 @@ public class MainFormView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        mniFunctions.setText("Funções");
+        mniCadastros.setText("Cadastros");
 
-        mniCadPessoa.setText("Cadastrar Pessoas");
+        mniCadPessoa.setText("Pessoa");
         mniCadPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniCadPessoaActionPerformed(evt);
             }
         });
-        mniFunctions.add(mniCadPessoa);
+        mniCadastros.add(mniCadPessoa);
 
-        mniCadProd.setText("Cadastrar Produtos");
+        mniCadProd.setText("Produto");
         mniCadProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniCadProdActionPerformed(evt);
             }
         });
-        mniFunctions.add(mniCadProd);
+        mniCadastros.add(mniCadProd);
 
-        mniGenMov.setText("Gerar Venda");
+        mniGenMov.setText("Movimentação");
         mniGenMov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniGenMovActionPerformed(evt);
             }
         });
-        mniFunctions.add(mniGenMov);
+        mniCadastros.add(mniGenMov);
 
-        mniFindMov.setText("Consulta Movimentações");
-        mniFindMov.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFindMovActionPerformed(evt);
-            }
-        });
-        mniFunctions.add(mniFindMov);
-
-        mniFindPessoa.setText("Consulta Pessoas");
-        mniFindPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFindPessoaActionPerformed(evt);
-            }
-        });
-        mniFunctions.add(mniFindPessoa);
-
-        mniFindProd.setText("Consulta Produtos");
-        mniFindProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFindProdActionPerformed(evt);
-            }
-        });
-        mniFunctions.add(mniFindProd);
-
-        mniPayMethod.setText("Formas de Pagamento");
+        mniPayMethod.setText("Forma de Pagamento");
         mniPayMethod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniPayMethodActionPerformed(evt);
             }
         });
-        mniFunctions.add(mniPayMethod);
+        mniCadastros.add(mniPayMethod);
 
-        jMenuBar1.add(mniFunctions);
+        mniCadEstoque.setText("Estoque");
+        mniCadEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCadEstoqueActionPerformed(evt);
+            }
+        });
+        mniCadastros.add(mniCadEstoque);
+
+        jMenuBar1.add(mniCadastros);
+
+        mniConsultas.setText("Consultas");
+
+        mniFindMov.setText("Movimentações");
+        mniFindMov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniFindMovActionPerformed(evt);
+            }
+        });
+        mniConsultas.add(mniFindMov);
+
+        mniFindPessoa.setText("Pessoas");
+        mniFindPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniFindPessoaActionPerformed(evt);
+            }
+        });
+        mniConsultas.add(mniFindPessoa);
+
+        mniFindProd.setText("Produtos");
+        mniFindProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniFindProdActionPerformed(evt);
+            }
+        });
+        mniConsultas.add(mniFindProd);
+
+        jMenuBar1.add(mniConsultas);
 
         mniCharts.setText("Gráficos");
 
@@ -314,6 +328,12 @@ public class MainFormView extends javax.swing.JFrame {
         chart.createAndShow();
     }//GEN-LAST:event_mniFaturamentoActionPerformed
 
+    private void mniCadEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadEstoqueActionPerformed
+        // TODO add your handling code here:
+        EstoqueView view = new EstoqueView(this, true);
+        view.setVisible(true);
+    }//GEN-LAST:event_mniCadEstoqueActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -352,14 +372,16 @@ public class MainFormView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mniAjuda;
+    private javax.swing.JMenuItem mniCadEstoque;
     private javax.swing.JMenuItem mniCadPessoa;
     private javax.swing.JMenuItem mniCadProd;
+    private javax.swing.JMenu mniCadastros;
     private javax.swing.JMenu mniCharts;
+    private javax.swing.JMenu mniConsultas;
     private javax.swing.JMenuItem mniFaturamento;
     private javax.swing.JMenuItem mniFindMov;
     private javax.swing.JMenuItem mniFindPessoa;
     private javax.swing.JMenuItem mniFindProd;
-    private javax.swing.JMenu mniFunctions;
     private javax.swing.JMenuItem mniGenMov;
     private javax.swing.JMenuItem mniPayMethod;
     private javax.swing.JMenuItem mniProjectLink;

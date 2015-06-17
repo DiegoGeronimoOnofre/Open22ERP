@@ -52,7 +52,7 @@ public class PessoasDB {
         }
     }
     
-    public static void add(Pessoa cli)
+    public static boolean add(Pessoa cli)
     {
         try{
             Connection con = DB.getConnection();
@@ -77,10 +77,12 @@ public class PessoasDB {
             
             st.executeUpdate(update);
             con.commit();
+            return true;
 
         }
         catch ( Exception e ){
             Log.log(e);
+            return false;
         }
     }
     

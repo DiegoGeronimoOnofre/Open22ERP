@@ -28,6 +28,7 @@ import erpsystem.Util;
 import static erpsystem.Util.*;
 import erpsystem.db.Produto;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -177,10 +178,47 @@ public class ProdutosView extends javax.swing.JFrame {
             prod.setCodBarras(codBarras);
             prod.setDescricao(desc);
             prod.setPreco(preco);
-            business.Produtos.add(prod);
+            
+            /**
+             * Este método abaixo injeta o código do produto
+             * no objeto passado como parâmetro "Produto"
+             * depois que tem certeza que o produto foi cadastrado.
+             */
+            
+            boolean result = business.Produtos.add(prod);
+            
+            if ( result ){
+                clearFields();
+                int opt = JOptionPane.showConfirmDialog(null, 
+                                                          " Gostaria de atualizar o estoque\n"
+                                                        + " do produto recem cadastrado? Se o\n"
+                                                        + " estoque do produto recem cadastrado\n"
+                                                        + " não for atualizado o sistema irá considerar\n"
+                                                        + " que não há estoque para o mesmo.", 
+                                                          "Atualizar Estoque", 
+                                                          JOptionPane.YES_NO_OPTION);
+                
+                if ( opt == JOptionPane.YES_OPTION ){
+                    int codProd = prod.getCodigo();
+                    EstoqueView estoqueView = new EstoqueView(null, true);
+                    estoqueView.setCodProd(codProd);
+                    estoqueView.setVisible(true);
+                }
+           }
+            else
+                msg("Problema ao cadastrar o novo produto.\n"
+                  + "Recomendável tentar novamente, se o problema \n"
+                  + "persistir informe o Desenvolvedor.");
         }
     }//GEN-LAST:event_btnCadActionPerformed
 
+    private void clearFields()
+    {
+        tfdCodBarras.setText("");
+        tfdDesc.setText("");
+        tfdPreco.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */

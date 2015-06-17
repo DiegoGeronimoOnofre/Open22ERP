@@ -30,5 +30,23 @@ package erpsystem.db;
 
 
 public class Estoque {
+    private int codProd;
     
+    private int qt;
+
+    public int getCodProd() {
+        return codProd;
+    }
+
+    public void setCodProd(int codProd) {
+        this.codProd = codProd;
+    }
+
+    public int getQt() {
+        return qt;
+    }
+
+    public void setQt(int qt) {
+        this.qt = qt;
+    }
 }

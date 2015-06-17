@@ -27,7 +27,7 @@ public class PayMethodView extends javax.swing.JDialog {
         this.setLocation(p);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Formas de Pagamento");        
+        this.setTitle("Forma de Pagamento");        
     }
 
     /**
