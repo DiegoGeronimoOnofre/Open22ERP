@@ -184,10 +184,11 @@ public class ConsultaProdutoView extends javax.swing.JDialog {
             search();
     }//GEN-LAST:event_tfdDescKeyPressed
 
-    final int COD_PROD   = 0;
-    final int COD_BARRAS = 1;
-    final int DESC       = 2;
-    final int PRECO      = 3;      
+    final int COD_PROD     = 0;
+    final int COD_BARRAS   = 1;
+    final int DESC         = 2;
+    final int PRECO_COMPRA = 3;      
+    final int PRECO_VENDA  = 4;      
     
     private void fill(java.util.List<Produto> prodList)
     {
@@ -196,20 +197,24 @@ public class ConsultaProdutoView extends javax.swing.JDialog {
         for ( int i = 0; i < prodList.size(); i++ ){
             Produto prod = prodList.get(i);
             
-            final int cod    = prod.getCodigo();
-            String codBarras = prod.getCodBarras();
-            String desc      = prod.getDescricao();
-            double preco     = prod.getPreco();
+            final int cod      = prod.getCodigo();
+            String codBarras   = prod.getCodBarras();
+            String desc        = prod.getDescricao();
+            double precoCompra = prod.getPrecoCompra();
+            double precoVenda  = prod.getPrecoVenda();
 
                
-            newModel.setValueAt(cod, i, COD_PROD);
-            newModel.setValueAt(codBarras, i, COD_BARRAS);
-            newModel.setValueAt(desc, i, DESC);
-            newModel.setValueAt(preco, i, PRECO);
+            newModel.setValueAt(cod,         i, COD_PROD);
+            newModel.setValueAt(codBarras,   i, COD_BARRAS);
+            newModel.setValueAt(desc,        i, DESC);
+            newModel.setValueAt(precoCompra, i, PRECO_COMPRA);
+            newModel.setValueAt(precoVenda,  i, PRECO_VENDA);
 
         }
         
         tblProds.setModel(newModel);
+        tblProds.getColumnModel().getColumn(COD_PROD).setMinWidth(65);
+        tblProds.getColumnModel().getColumn(COD_PROD).setMaxWidth(65);
     }     
     
     /**
@@ -255,9 +260,10 @@ public class ConsultaProdutoView extends javax.swing.JDialog {
     }
     
     private final static Object[] prodCols = new Object[]{"Código",
-                                                         "Código de Barras",
-                                                         "Descrição",
-                                                         "Preço"
+                                                          "Código de barras",
+                                                          "Descrição",
+                                                          "Preço de compra",
+                                                          "Preço de venda"
                                                         };
     
     private final TableModel emptyProdModel = new XTableModel(new Object[0][prodCols.length], prodCols);    
@@ -274,6 +280,8 @@ public class ConsultaProdutoView extends javax.swing.JDialog {
         //Evitando seleção múltipla
         tblProds.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
         tblProds.setModel(emptyProdModel);
+        tblProds.getColumnModel().getColumn(COD_PROD).setMinWidth(65);
+        tblProds.getColumnModel().getColumn(COD_PROD).setMaxWidth(65);
     }      
     
     protected void afterConstruct()

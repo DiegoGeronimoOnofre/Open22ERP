@@ -34,7 +34,9 @@ public class Produto {
     
     private String descricao;
 
-    private double preco;
+    private double precoCompra;
+    
+    private double precoVenda;
     
 
     public void setCodigo(int codigo) {
@@ -49,11 +51,6 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-    
-    
     public int getCodigo() {
         return codigo;
     }
@@ -65,11 +62,7 @@ public class Produto {
     public String getDescricao() {
         return descricao;
     }
-
-    public double getPreco() {
-        return preco;
-    }
-    
+ 
     public String getSummDesc()
     {        
         if ( descricao.length() >= 12 )
@@ -77,9 +70,29 @@ public class Produto {
         else
             return descricao;
     }
+
+    public double getPrecoCompra() {
+        return precoCompra;
+    }
+
+    public void setPrecoCompra(double precoCompra) {
+        this.precoCompra = precoCompra;
+    }
+
+    public double getPrecoVenda() {
+        return precoVenda;
+    }
+
+    public void setPrecoVenda(double precoVenda) {
+        this.precoVenda = precoVenda;
+    }
     
     public String getSummary()
     {
-        return "Descrição do Produto:'" + descricao + "' Valor Unit:R$" + preco;
-    }
+        return  descricao 
+                + " Compra:R$" 
+                + precoCompra
+                + " Venda:R$" 
+                + precoVenda;
+    }    
 }

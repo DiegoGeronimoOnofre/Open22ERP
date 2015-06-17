@@ -26,15 +26,36 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnCad" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblDesc" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdDesc" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                  <Component id="lblCodBarras" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdCodBarras" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                  <Component id="lblPreco" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfdPreco" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="tfdPrecoCompra" min="-2" pref="88" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblCompraValidator" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblPrecoCompra" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="tfdPrecoVenda" min="-2" pref="88" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblVendaValidator" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblPrecoVenda" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="lblDesc" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCodBarras" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnCad" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfdCodBarras" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="tfdDesc" min="-2" pref="210" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="143" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="262" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,13 +70,23 @@
               <Component id="lblDesc" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="tfdDesc" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="lblPreco" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="lblPrecoCompra" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tfdPreco" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfdPrecoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCompraValidator" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Component id="lblPrecoVenda" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfdPrecoVenda" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblVendaValidator" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Component id="btnCad" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,14 +111,44 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblCodBarras">
       <Properties>
-        <Property name="text" type="java.lang.String" value="C&#xf3;digo de Barras"/>
+        <Property name="text" type="java.lang.String" value="C&#xf3;digo de barras"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdPreco">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblPreco">
+    <Component class="javax.swing.JTextField" name="tfdPrecoCompra">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor de Texto"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfdPrecoCompraKeyPressed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfdPrecoCompraKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPrecoCompra">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pre&#xe7;o de compra R$"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPrecoVenda">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pre&#xe7;o de venda R$"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfdPrecoVenda">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfdPrecoVendaKeyPressed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfdPrecoVendaKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCompraValidator">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="..."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblVendaValidator">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="..."/>
       </Properties>
     </Component>
   </SubComponents>

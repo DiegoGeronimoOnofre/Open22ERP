@@ -71,4 +71,17 @@ public class Util {
         return new Point( x, y );
     }     
     
+    public static boolean isValidPriceChar(char charValue)
+    {
+        String s =  String.valueOf(charValue);
+        int value = isInt(s) ? Integer.parseInt(s):-1;
+        
+        if ( value >= 0 && value <= 9  )
+            return true;
+        else if ( charValue == '.' )
+            return true;
+        
+        return false;
+    }
+    
 }

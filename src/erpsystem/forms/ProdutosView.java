@@ -27,8 +27,11 @@ package erpsystem.forms;
 import erpsystem.Util;
 import static erpsystem.Util.*;
 import erpsystem.db.Produto;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -48,6 +51,14 @@ public class ProdutosView extends javax.swing.JFrame {
         
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setTitle("Cadastro de Produtos");
+        
+        tfdPrecoCompra.setToolTipText("Exemplo: 8.99");
+        tfdPrecoVenda.setToolTipText("Exemplo: 299.90");
+        tfdPrecoCompra.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        tfdPrecoVenda.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        
+        tfdPrecoCompra.setHorizontalAlignment(JTextField.RIGHT); 
+        tfdPrecoVenda.setHorizontalAlignment(JTextField.RIGHT); 
     }
 
     /**
@@ -64,8 +75,12 @@ public class ProdutosView extends javax.swing.JFrame {
         tfdDesc = new javax.swing.JTextField();
         tfdCodBarras = new javax.swing.JTextField();
         lblCodBarras = new javax.swing.JLabel();
-        tfdPreco = new javax.swing.JTextField();
-        lblPreco = new javax.swing.JLabel();
+        tfdPrecoCompra = new javax.swing.JTextField();
+        lblPrecoCompra = new javax.swing.JLabel();
+        lblPrecoVenda = new javax.swing.JLabel();
+        tfdPrecoVenda = new javax.swing.JTextField();
+        lblCompraValidator = new javax.swing.JLabel();
+        lblVendaValidator = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,9 +93,34 @@ public class ProdutosView extends javax.swing.JFrame {
 
         lblDesc.setText("Descrição");
 
-        lblCodBarras.setText("Código de Barras");
+        lblCodBarras.setText("Código de barras");
 
-        lblPreco.setText("Preço");
+        tfdPrecoCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        tfdPrecoCompra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfdPrecoCompraKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfdPrecoCompraKeyReleased(evt);
+            }
+        });
+
+        lblPrecoCompra.setText("Preço de compra R$");
+
+        lblPrecoVenda.setText("Preço de venda R$");
+
+        tfdPrecoVenda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfdPrecoVendaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfdPrecoVendaKeyReleased(evt);
+            }
+        });
+
+        lblCompraValidator.setText("...");
+
+        lblVendaValidator.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,14 +129,28 @@ public class ProdutosView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCad)
-                    .addComponent(lblDesc)
-                    .addComponent(tfdDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCodBarras)
-                    .addComponent(tfdCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPreco)
-                    .addComponent(tfdPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(262, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfdPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCompraValidator))
+                            .addComponent(lblPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfdPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblVendaValidator))
+                            .addComponent(lblPrecoVenda))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lblDesc, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblCodBarras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCad, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfdCodBarras, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(tfdDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(143, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,13 +163,21 @@ public class ProdutosView extends javax.swing.JFrame {
                 .addComponent(lblDesc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfdDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblPreco)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPrecoCompra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfdPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCompraValidator))
+                .addGap(12, 12, 12)
+                .addComponent(lblPrecoVenda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblVendaValidator))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(btnCad)
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -138,30 +200,42 @@ public class ProdutosView extends javax.swing.JFrame {
         }
         
         
-        //Validando o preço.    
+        //Validando os preços.    
         
+        if ( validatePreco(tfdPrecoCompra, "compra") == false )
+            return false;
         
+        if ( validatePreco(tfdPrecoVenda, "venda") == false )
+            return false;
+                
+        return true;
+    }
+    
+    private boolean validatePreco(JTextField tfdPreco, String name)
+    {
         String preco = tfdPreco.getText().trim();
         
-        if ( preco.equals("") )
-        {
-            msg("Por favor, informe um preço para produto.");
+        if ( preco.equals("") ){
+            msg("Por favor, informe um preço de " + name + " para produto.");
             tfdPreco.grabFocus();
             return false;        
         }
         
         if (! isDouble(preco) ){
-            msg("Por favor, informe um valor numérico\n"
-              + " válido para o preço do produto.");
+            msg(
+              "O sistema trabalha com o padrão americano para valores,\n"
+              + "por isso é necessário substituir a vírgula \",\" por um ponto \".\"\n"
+              + "para separar os centavos."
+              + "Exemplos: 45.23  58.25  100");
             tfdPreco.grabFocus();
             return false;
         }
         
         if (Double.parseDouble(preco) <= 0 ){
-            msg("O preço do produto deve ser igual ou superior a zero.");
+            msg("O preço de " + name + " do produto deve ser igual ou superior a zero.");
             tfdPreco.grabFocus();
             return false;
-        }        
+        }     
         
         return true;
     }
@@ -171,13 +245,15 @@ public class ProdutosView extends javax.swing.JFrame {
         if ( validateFields() ){
             Produto prod = new Produto();
 
-            String codBarras = tfdCodBarras.getText();
-            String desc = tfdDesc.getText();
-            double preco = Double.parseDouble(tfdPreco.getText());
+            String codBarras   = tfdCodBarras.getText();
+            String desc        = tfdDesc.getText();
+            double precoCompra = Double.parseDouble(tfdPrecoCompra.getText());
+            double precoVenda  = Double.parseDouble(tfdPrecoVenda.getText());
 
             prod.setCodBarras(codBarras);
             prod.setDescricao(desc);
-            prod.setPreco(preco);
+            prod.setPrecoCompra(precoCompra);
+            prod.setPrecoVenda(precoVenda);
             
             /**
              * Este método abaixo injeta o código do produto
@@ -190,8 +266,8 @@ public class ProdutosView extends javax.swing.JFrame {
             if ( result ){
                 clearFields();
                 int opt = JOptionPane.showConfirmDialog(null, 
-                                                          " Gostaria de atualizar o estoque\n"
-                                                        + " do produto recem cadastrado? Se o\n"
+                                                          " Gostaria de adicionar estoque\n"
+                                                        + " para o produto recem cadastrado? Se o\n"
                                                         + " estoque do produto recem cadastrado\n"
                                                         + " não for atualizado o sistema irá considerar\n"
                                                         + " que não há estoque para o mesmo.", 
@@ -204,6 +280,10 @@ public class ProdutosView extends javax.swing.JFrame {
                     estoqueView.setCodProd(codProd);
                     estoqueView.setVisible(true);
                 }
+                
+                tfdCodBarras.grabFocus();
+                tfdPrecoCompra.setBackground(Color.white); 
+                tfdPrecoVenda.setBackground(Color.white); 
            }
             else
                 msg("Problema ao cadastrar o novo produto.\n"
@@ -212,11 +292,81 @@ public class ProdutosView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadActionPerformed
 
+    private void tfdPrecoCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdPrecoCompraKeyPressed
+        // TODO add your handling code here:
+      /*  char c = evt.getKeyChar();
+        
+        if ( c == ',' )
+            lblCompraValidator.setText("Troque a ',' por '.'");
+        else
+            lblCompraValidator.setText("...");*/
+
+    }//GEN-LAST:event_tfdPrecoCompraKeyPressed
+
+    private void tfdPrecoCompraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdPrecoCompraKeyReleased
+        // TODO add your handling code here:       
+        String value = tfdPrecoCompra.getText();       
+        
+        if ( !value.trim().equals("") ){
+            if ( Util.isDouble(value) ){
+                if ( value.length() > 1 && value.charAt(0) == '.' )
+                    tfdPrecoCompra.setBackground(new Color(255, 115, 115)); 
+                else{    
+                    tfdPrecoCompra.setBackground(new Color(150, 255, 150));
+                    lblCompraValidator.setText("...");
+                }
+            }
+            else{
+                tfdPrecoCompra.setBackground(new Color(255, 115, 115)); 
+                
+                if  (value.indexOf(',') != -1)
+                    lblCompraValidator.setText("Troque a ',' por '.'");
+            }
+        }
+        else
+            tfdPrecoCompra.setBackground(Color.white);
+    }//GEN-LAST:event_tfdPrecoCompraKeyReleased
+
+    private void tfdPrecoVendaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdPrecoVendaKeyReleased
+        // TODO add your handling code here:
+        String value = tfdPrecoVenda.getText();       
+        
+        if ( !value.trim().equals("") ){
+            if ( Util.isDouble(value) ){
+                if ( value.length() > 1 && value.charAt(0) == '.' )
+                    tfdPrecoVenda.setBackground(new Color(255, 115, 115)); 
+                else{                 
+                    tfdPrecoVenda.setBackground(new Color(150, 255, 150));
+                    lblVendaValidator.setText("...");
+                }
+            }
+            else{
+                tfdPrecoVenda.setBackground(new Color(255, 115, 115));   
+                
+                if  (value.indexOf(',') != -1)
+                    lblVendaValidator.setText("Troque a ',' por '.'");
+            }
+        }
+        else
+            tfdPrecoVenda.setBackground(Color.white);        
+    }//GEN-LAST:event_tfdPrecoVendaKeyReleased
+
+    private void tfdPrecoVendaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdPrecoVendaKeyPressed
+        // TODO add your handling code here:
+       /* char c = evt.getKeyChar();
+        
+        if ( c == ',' )
+            lblVendaValidator.setText("Troque a ',' por '.'");
+        else
+            lblVendaValidator.setText("...");  */      
+    }//GEN-LAST:event_tfdPrecoVendaKeyPressed
+    
     private void clearFields()
     {
         tfdCodBarras.setText("");
         tfdDesc.setText("");
-        tfdPreco.setText("");
+        tfdPrecoCompra.setText("");
+        tfdPrecoVenda.setText("");
     }
     
     /**
@@ -257,10 +407,14 @@ public class ProdutosView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCad;
     private javax.swing.JLabel lblCodBarras;
+    private javax.swing.JLabel lblCompraValidator;
     private javax.swing.JLabel lblDesc;
-    private javax.swing.JLabel lblPreco;
+    private javax.swing.JLabel lblPrecoCompra;
+    private javax.swing.JLabel lblPrecoVenda;
+    private javax.swing.JLabel lblVendaValidator;
     private javax.swing.JTextField tfdCodBarras;
     private javax.swing.JTextField tfdDesc;
-    private javax.swing.JTextField tfdPreco;
+    private javax.swing.JTextField tfdPrecoCompra;
+    private javax.swing.JTextField tfdPrecoVenda;
     // End of variables declaration//GEN-END:variables
 }

@@ -161,11 +161,11 @@ public class ConsultaPessoaView extends javax.swing.JFrame {
     private final TableModel emptyCliModel = new XTableModel(new Object[0][cliCols.length], cliCols);
     
     public final int COD_COL = 0;
-    final int NAME  = 1;
-    final int CPF   = 2;
-    final int EMAIL = 3;
-    final int LOC   = 4;    
-    final int TEL   = 5;    
+    final int NAME           = 1;
+    final int CPF            = 2;
+    final int EMAIL          = 3;
+    final int LOC            = 4;    
+    final int TEL            = 5;    
     
     private void fill(java.util.List<Pessoa> cliList)
     {
@@ -181,15 +181,17 @@ public class ConsultaPessoaView extends javax.swing.JFrame {
             String loc   = cli.getLocalizacao();
             String tel   = cli.getTelefone();
                
-            newModel.setValueAt(cod, i, COD_COL);
-            newModel.setValueAt(nome, i, NAME);
-            newModel.setValueAt(cpf, i, CPF);
-            newModel.setValueAt(email, i, EMAIL);
-            newModel.setValueAt(loc, i, LOC);
-            newModel.setValueAt(tel, i, TEL);
+            newModel.setValueAt(cod,   i, COD_COL);
+            newModel.setValueAt(nome,  i, NAME   );
+            newModel.setValueAt(cpf,   i, CPF    );
+            newModel.setValueAt(email, i, EMAIL  );
+            newModel.setValueAt(loc,   i, LOC    );
+            newModel.setValueAt(tel,   i, TEL    );
         }
         
         tblClientes.setModel(newModel);
+        tblClientes.getColumnModel().getColumn(COD_COL).setMinWidth(65);
+        tblClientes.getColumnModel().getColumn(COD_COL).setMaxWidth(65);
     }    
     
     public javax.swing.JTable getTblClientes()
@@ -235,6 +237,8 @@ public class ConsultaPessoaView extends javax.swing.JFrame {
         //Evitando seleção múltipla
         tblClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
         tblClientes.setModel(emptyCliModel);
+        tblClientes.getColumnModel().getColumn(COD_COL).setMinWidth(65);
+        tblClientes.getColumnModel().getColumn(COD_COL).setMaxWidth(65);
     }    
     
     /**

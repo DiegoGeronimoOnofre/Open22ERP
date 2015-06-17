@@ -65,17 +65,19 @@ public class ProdutosDB{
             Connection con = DB.getConnection();
             Statement st = con.createStatement();
             
-            int cod          = genCode();
-            String codBarras = prod.getCodBarras();
-            String desc      = prod.getDescricao();
-            double preco     = prod.getPreco();
+            int cod            = genCode();
+            String codBarras   = prod.getCodBarras();
+            String desc        = prod.getDescricao();
+            double precoCompra = prod.getPrecoCompra();
+            double precoVenda  = prod.getPrecoVenda();
             
             String update = " insert "
                           + " into produtos "
                           + " values(" + cod + ","
                                     + "'" + codBarras + "',"
                                     + "'" + desc + "',"
-                                    + preco
+                                    + precoCompra + ","
+                                    + precoVenda
                           + ")";
             
             st.executeUpdate(update);
@@ -127,12 +129,14 @@ public class ProdutosDB{
                 int icod = rs.getInt("codigo");
                 String codBarras = rs.getString("cod_barras");
                 String desc = rs.getString("descricao");
-                double preco = rs.getDouble("preco");
+                double precoCompra = rs.getDouble("preco_compra");
+                double precoVenda = rs.getDouble("preco_venda");
 
                 prod.setCodigo(icod);
                 prod.setCodBarras(codBarras);
                 prod.setDescricao(desc);
-                prod.setPreco(preco);
+                prod.setPrecoCompra(precoCompra);
+                prod.setPrecoVenda(precoVenda);
 
                 return prod;
             }
@@ -151,10 +155,11 @@ public class ProdutosDB{
         try{
             Connection con = DB.getConnection();
             Statement st = con.createStatement();
-            String update = " select produtos.codigo     as 'cod',"
-                          + "        produtos.cod_barras as 'cod_barras',"
-                          + "        produtos.descricao  as 'desc',"
-                          + "        produtos.preco      as 'preco'"
+            String update = " select produtos.codigo       as 'cod',"
+                          + "        produtos.cod_barras   as 'cod_barras',"
+                          + "        produtos.descricao    as 'desc',"
+                          + "        produtos.preco_compra as 'preco_compra',"
+                          + "        produtos.preco_venda  as 'preco_venda'"
                           + " from produtos "
                           + " where upper(trim(produtos.descricao)) like '%" + desc.trim().toUpperCase() + "%'";
             
@@ -162,16 +167,18 @@ public class ProdutosDB{
             List<Produto> prodList = new ArrayList<>();
             
             while (rs.next()){
-                final int cod    = rs.getInt("cod");     
-                String codBarras = rs.getString("cod_barras");
-                String descricao = rs.getString("desc");
-                double preco     = rs.getDouble("preco");
+                final int cod      = rs.getInt("cod");     
+                String codBarras   = rs.getString("cod_barras");
+                String descricao   = rs.getString("desc");
+                double precoCompra = rs.getDouble("preco_compra");
+                double precoVenda  = rs.getDouble("preco_venda");
                 
                 Produto prod = new Produto();             
                 prod.setCodigo(cod);
                 prod.setCodBarras(codBarras);
                 prod.setDescricao(descricao);
-                prod.setPreco(preco);
+                prod.setPrecoCompra(precoCompra);
+                prod.setPrecoVenda(precoVenda);
                 
                 prodList.add(prod);
             }

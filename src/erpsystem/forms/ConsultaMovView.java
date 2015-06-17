@@ -243,7 +243,7 @@ public class ConsultaMovView extends javax.swing.JFrame {
         double totalValue = 0;
         
         for ( int i = 0; i < mt.getRowCount(); i++ ){
-            double value = (double) mt.getValueAt(i,4);
+            double value = (double) mt.getValueAt(i, TOTAL);
             totalValue += value;
         }
         
@@ -307,29 +307,36 @@ public class ConsultaMovView extends javax.swing.JFrame {
             
             if (payMethodObj != null){
                 String payMethodValue = payMethodObj.getDescricao();
+                String tt = (type == MovView.COMPRA_VALUE?MovView.COMPRA:MovView.VENDA);
 
-                newModel.setValueAt(movCod, i, MOV_COD);
-                newModel.setValueAt(clientName, i, CLIENT_NAME);
-                newModel.setValueAt((type == MovView.COMPRA_VALUE?MovView.COMPRA:MovView.VENDA), i, TYPE);
+                newModel.setValueAt(movCod,         i, MOV_COD);
+                newModel.setValueAt(clientName,     i, CLIENT_NAME);
+                newModel.setValueAt(tt,             i, TYPE);
                 newModel.setValueAt(payMethodValue, i, PAY_METHOD);
-                newModel.setValueAt(data, i, DATA);
-                newModel.setValueAt(hora, i, HORA);
+                newModel.setValueAt(data,           i, DATA);
+                newModel.setValueAt(hora,           i, HORA);
             }
             else
                 Log.log(new Exception("Problema 5448"));
         }
         
         tblMovs.setModel(newModel);
-        tblMovs.getColumnModel().getColumn(0).setMinWidth(0);  
-        tblMovs.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblMovs.getColumnModel().getColumn(MOV_COD).setMinWidth(0);  
+        tblMovs.getColumnModel().getColumn(MOV_COD).setMaxWidth(0);
     }
     
-    static final int MOV_COD = 0;
+    static final int MOV_COD     = 0;
     static final int CLIENT_NAME = 1;
-    static final int TYPE = 2;
-    static final int PAY_METHOD = 3;
-    static final int DATA = 4;
-    static final int HORA = 5;    
+    static final int TYPE        = 2;
+    static final int PAY_METHOD  = 3;
+    static final int DATA        = 4;
+    static final int HORA        = 5;   
+        
+    static final int COD_PROD = 0;
+    static final int DESC     = 1;
+    static final int QT       = 2;
+    static final int PRECO    = 3;
+    static final int TOTAL    = 4;    
 
     private void fillProds(java.util.List<MovProd> mpList)
     {
@@ -342,20 +349,16 @@ public class ConsultaMovView extends javax.swing.JFrame {
             final int qt       = mp.getQt();
             final double preco = mp.getPreco();
             
-            final int COD_PROD = 0;
-            final int DESC     = 1;
-            final int QT       = 2;
-            final int PRECO    = 3;
-            final int TOTAL    = 4;
-            
-            newModel.setValueAt(movCod, i, COD_PROD);
-            newModel.setValueAt(desc, i, DESC);
-            newModel.setValueAt(qt, i, QT);
-            newModel.setValueAt(preco, i, PRECO);
+            newModel.setValueAt(movCod,     i, COD_PROD);
+            newModel.setValueAt(desc,       i, DESC);
+            newModel.setValueAt(qt,         i, QT);
+            newModel.setValueAt(preco,      i, PRECO);
             newModel.setValueAt(qt * preco, i, TOTAL);
         }
         
         tblProds.setModel(newModel);
+        tblProds.getColumnModel().getColumn(COD_PROD).setMinWidth(65);
+        tblProds.getColumnModel().getColumn(COD_PROD).setMaxWidth(65);
     }
     
     private void search()
@@ -378,7 +381,7 @@ public class ConsultaMovView extends javax.swing.JFrame {
     private void tblMovsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMovsMouseClicked
         // TODO add your handling code here:
         int selectedRow = tblMovs.getSelectedRow();
-        int movCod = (int) tblMovs.getModel().getValueAt( selectedRow, 0);
+        int movCod = (int) tblMovs.getModel().getValueAt( selectedRow, MOV_COD);
         java.util.List<erpsystem.db.MovProd> mpList = MovProdDB.findProds(movCod);
         
         if ( mpList != null ){
@@ -409,8 +412,8 @@ public class ConsultaMovView extends javax.swing.JFrame {
         tblMovs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
         tblMovs.setModel(emptyMovsModel);
         
-        tblMovs.getColumnModel().getColumn(0).setMinWidth(0);  
-        tblMovs.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblMovs.getColumnModel().getColumn(MOV_COD).setMinWidth(0);  
+        tblMovs.getColumnModel().getColumn(MOV_COD).setMaxWidth(0);
     }
     
     private void initTblProds()
@@ -420,6 +423,8 @@ public class ConsultaMovView extends javax.swing.JFrame {
         //Evitando seleção múltipla
         tblProds.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);  
         tblProds.setModel(emptyProdsModel);
+        tblProds.getColumnModel().getColumn(COD_PROD).setMinWidth(65);
+        tblProds.getColumnModel().getColumn(COD_PROD).setMaxWidth(65);
     }
     
     /**

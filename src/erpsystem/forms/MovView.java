@@ -66,7 +66,7 @@ public class MovView extends javax.swing.JFrame {
         this.setLocation(p);
         
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setTitle("Gerar Movimentação");
+        this.setTitle("Movimentação");
         this.setResizable(false);
         
         this.cbxPayMethod.setEditable(false);
@@ -380,10 +380,10 @@ public class MovView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private final static Object[] colNames = new Object[]{"Código",
-                                                      "Descrição",
-                                                      "Quantidade",
-                                                      "Valor Unit",
-                                                      "Total",
+                                                          "Descrição",
+                                                          "Quantidade",
+                                                          "Valor Unit",
+                                                          "Total",
                                                 };;
     
     final TableModel emptyModel = new XTableModel(new Object[0][colNames.length], colNames);
@@ -393,8 +393,7 @@ public class MovView extends javax.swing.JFrame {
         
         /* ESTE PROJETO ESTÁ SENDO USADO ------> DefaultTableModel <------.
         Conforme o mesmo crescer, será necessário implementar 
-        o próprio TableModel. Pelo menos é isso que está dizendo um Desenvolvedor experiente 
-        de um fórum*/
+        o próprio TableModel.*/
 
         
         //Definição inicial de uma venda
@@ -405,6 +404,8 @@ public class MovView extends javax.swing.JFrame {
         tblProd.getTableHeader().setReorderingAllowed(false);
         //Evitando seleção múltipla
         tblProd.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
+        tblProd.getColumnModel().getColumn(COD_PROD).setMinWidth(65);
+        tblProd.getColumnModel().getColumn(COD_PROD).setMaxWidth(65);
     }//GEN-LAST:event_winOpen
 
     private static void fill( TableModel source, TableModel dest )
@@ -517,6 +518,12 @@ public class MovView extends javax.swing.JFrame {
         lockCli = false;    
     }
     
+    static final int COD_PROD = 0;
+    static final int DESC     = 1;
+    static final int QT       = 2;
+    static final int PRECO    = 3;
+    static final int TOTAL    = 4;
+    
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         
@@ -535,19 +542,34 @@ public class MovView extends javax.swing.JFrame {
 
                     fill(oldModel, tm);
 
-                    tm.setValueAt(prod.getCodigo(), rowCount, 0);
-                    tm.setValueAt(prod.getDescricao(), rowCount, 1);
+                    tm.setValueAt(prod.getCodigo(), rowCount, COD_PROD);
+                    tm.setValueAt(prod.getDescricao(), rowCount, DESC);
 
                     int qt = Integer.parseInt(tfdQt.getText());
-                    tm.setValueAt(qt, rowCount, 2);
-                    double preco = prod.getPreco();
+                    tm.setValueAt(qt, rowCount, QT);
+                    
+                    
+                    //Obtendo o preço relativo ao tipo de movimentação.
+                    
+//------------------------------------------------------------------------------                    
+                    double preco = 0;
+                    String movType = (String) cbxMovType.getSelectedItem();
+                    
+                    if ( movType.trim().toLowerCase().equals(COMPRA.trim().toLowerCase()) )
+                        preco = prod.getPrecoCompra();
+                    else if ( movType.trim().toLowerCase().equals(VENDA.trim().toLowerCase()) )
+                        preco = prod.getPrecoVenda();
+                    
+//------------------------------------------------------------------------------                       
 
-                    tm.setValueAt(preco, rowCount, 3);
+                    tm.setValueAt(preco, rowCount, PRECO);
 
                     double total  =  qt * preco;
-                    tm.setValueAt(total, rowCount, 4);
-
+                    tm.setValueAt(total, rowCount, TOTAL);
+                    
                     tblProd.setModel(tm);
+                    tblProd.getColumnModel().getColumn(COD_PROD).setMinWidth(65); 
+                    tblProd.getColumnModel().getColumn(COD_PROD).setMaxWidth(65); 
                     lockCli();
                     calcTotalValue();
                     updateMovInfo();
@@ -605,7 +627,7 @@ public class MovView extends javax.swing.JFrame {
         TableModel model = tblProd.getModel();
         
         for ( int i = 0; i < model.getRowCount(); i++ ){
-            double value = ( double ) model.getValueAt(i, 4);
+            double value = ( double ) model.getValueAt(i, TOTAL);
             result += value;
         }
         
@@ -635,8 +657,6 @@ public class MovView extends javax.swing.JFrame {
         }
         
         terminateMov();
-
-
     }//GEN-LAST:event_btnConcluirActionPerformed
 
     private java.util.List<MovProd> getItemList(TableModel tm)
@@ -644,9 +664,9 @@ public class MovView extends javax.swing.JFrame {
         java.util.List<MovProd> result = new ArrayList();
         
         for ( int r = 0; r < tm.getRowCount(); r++ ){
-            int code = (int) tm.getValueAt(r,0);
-            int qt = (int) tm.getValueAt(r,2);
-            double preco = (double) tm.getValueAt(r,3);    
+            int code = (int) tm.getValueAt(r,COD_PROD);
+            int qt = (int) tm.getValueAt(r,QT);
+            double preco = (double) tm.getValueAt(r, PRECO);    
             
             MovProd mp = new MovProd();
             mp.setCodProd(code);

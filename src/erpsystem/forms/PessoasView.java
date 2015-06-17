@@ -109,7 +109,7 @@ public class PessoasView extends javax.swing.JFrame {
                     .addComponent(lblTel)
                     .addComponent(tfdTel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCad))
-                .addGap(0, 299, Short.MAX_VALUE))
+                .addGap(0, 295, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,9 +134,9 @@ public class PessoasView extends javax.swing.JFrame {
                 .addComponent(lblTel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfdTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCad)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -213,6 +213,7 @@ public class PessoasView extends javax.swing.JFrame {
             if ( result ){
                 msg("Nova pessoa cadastrada com sucesso.");
                 clearFields();
+                tfdNome.grabFocus();
             }
             else
                 msg("Problema ao cadastrar a nova pessoa.\n"
