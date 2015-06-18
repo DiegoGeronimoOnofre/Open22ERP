@@ -35,12 +35,14 @@ import erpsystem.db.PessoasDB;
 import erpsystem.db.Pessoa;
 import erpsystem.db.ProdutosDB;
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.ListSelectionModel;
 
 import javax.swing.table.TableModel;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 
 
@@ -81,6 +83,10 @@ public class MovView extends javax.swing.JFrame {
         tfdCodCli.setNextFocusableComponent(tfdCodProd);
         tfdCodProd.setNextFocusableComponent(tfdQt);
         tfdQt.setNextFocusableComponent(tfdCodCli);
+        
+        tfdNovoPreco.setToolTipText("Exemplo: 299.90");
+        tfdNovoPreco.setFont(new Font("Times New Roman", Font.BOLD, 12));      
+        tfdNovoPreco.setHorizontalAlignment(JTextField.RIGHT);         
     }
 
     final void fillMovTypes()
@@ -136,6 +142,9 @@ public class MovView extends javax.swing.JFrame {
         lblPayMethod = new javax.swing.JLabel();
         lblTipo = new javax.swing.JLabel();
         cbxMovType = new javax.swing.JComboBox();
+        lblPreco = new javax.swing.JLabel();
+        tfdNovoPreco = new javax.swing.JTextField();
+        lblNovoPrecoValidator = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -144,7 +153,7 @@ public class MovView extends javax.swing.JFrame {
             }
         });
 
-        lblCodCli.setText("Código Cliente");
+        lblCodCli.setText("Código Cliente:");
 
         tfdCodCli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -155,7 +164,7 @@ public class MovView extends javax.swing.JFrame {
             }
         });
 
-        lblCodProd.setText("Código Produto");
+        lblCodProd.setText("Código Produto:");
 
         btnAdd.setText("Adicionar Produto");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -244,6 +253,16 @@ public class MovView extends javax.swing.JFrame {
 
         cbxMovType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        lblPreco.setText("Valor Unit:");
+
+        tfdNovoPreco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfdNovoPrecoKeyReleased(evt);
+            }
+        });
+
+        lblNovoPrecoValidator.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -270,12 +289,13 @@ public class MovView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCodCli)
-                            .addComponent(lblProdMov)
                             .addComponent(lblCodProd)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblQt)
                                 .addGap(8, 8, 8)
-                                .addComponent(tfdQt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfdQt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(lblPreco))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(tfdCodCli, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -286,16 +306,11 @@ public class MovView extends javax.swing.JFrame {
                                 .addComponent(btnFindProd)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblCodProd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAdd))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(346, 346, 346)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
@@ -313,7 +328,19 @@ public class MovView extends javax.swing.JFrame {
                                                 .addGap(4, 4, 4)))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(cbxMovType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cbxPayMethod, 0, 187, Short.MAX_VALUE))))))))
+                                            .addComponent(cbxPayMethod, 0, 187, Short.MAX_VALUE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(tfdNovoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblNovoPrecoValidator)
+                                .addGap(49, 49, 49)
+                                .addComponent(lblCodProd1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAdd))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblProdMov)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -355,14 +382,21 @@ public class MovView extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblQt)
                         .addComponent(tfdQt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAdd)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblProdMov)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAdd)
+                        .addComponent(lblPreco)
+                        .addComponent(tfdNovoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNovoPrecoValidator)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(22, 22, 22)
+                        .addGap(49, 49, 49)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(375, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblProdMov)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTotal)
                             .addComponent(lblValorTotal))
@@ -370,10 +404,7 @@ public class MovView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancel))
-                        .addGap(22, 22, 22))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(389, Short.MAX_VALUE))))
+                        .addGap(22, 22, 22))))
         );
 
         pack();
@@ -845,6 +876,30 @@ public class MovView extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_tfdCodProdKeyPressed
 
+    private void tfdNovoPrecoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdNovoPrecoKeyReleased
+        // TODO add your handling code here:
+        String value = tfdNovoPreco.getText();       
+        
+        if ( !value.trim().equals("") ){
+            if ( Util.isDouble(value) ){
+                if ( value.length() > 1 && value.charAt(0) == '.' )
+                    tfdNovoPreco.setBackground(new Color(255, 115, 115)); 
+                else{                 
+                    tfdNovoPreco.setBackground(new Color(150, 255, 150));
+                    lblNovoPrecoValidator.setText("...");
+                }
+            }
+            else{
+                tfdNovoPreco.setBackground(new Color(255, 115, 115));   
+                
+                if  (value.indexOf(',') != -1)
+                    lblNovoPrecoValidator.setText("Troque a ',' por '.'");
+            }
+        }
+        else
+            tfdNovoPreco.setBackground(Color.white);          
+    }//GEN-LAST:event_tfdNovoPrecoKeyReleased
+
     private boolean isEmptyTabProd()
     {
         return tblProd.getModel().getRowCount() == 0;
@@ -925,7 +980,9 @@ public class MovView extends javax.swing.JFrame {
     private javax.swing.JLabel lblCodCli;
     private javax.swing.JLabel lblCodProd;
     private javax.swing.JLabel lblCodProd1;
+    private javax.swing.JLabel lblNovoPrecoValidator;
     private javax.swing.JLabel lblPayMethod;
+    private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblProdInfo;
     private javax.swing.JLabel lblProdMov;
     private javax.swing.JLabel lblQt;
@@ -935,6 +992,7 @@ public class MovView extends javax.swing.JFrame {
     private javax.swing.JTable tblProd;
     private javax.swing.JTextField tfdCodCli;
     private javax.swing.JTextField tfdCodProd;
+    private javax.swing.JTextField tfdNovoPreco;
     private javax.swing.JTextField tfdQt;
     // End of variables declaration//GEN-END:variables
 }
