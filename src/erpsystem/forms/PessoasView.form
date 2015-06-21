@@ -119,6 +119,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdTel">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfdTelKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTel">
       <Properties>

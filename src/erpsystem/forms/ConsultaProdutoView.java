@@ -25,6 +25,8 @@
 package erpsystem.forms;
 
 import erpsystem.Util;
+import erpsystem.db.Estoque;
+import erpsystem.db.EstoqueDB;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 
@@ -159,10 +161,10 @@ public class ConsultaProdutoView extends javax.swing.JDialog {
     {
         tblProds.setEnabled(false);
         String desc = tfdDesc.getText();
-        java.util.List<Produto> cliList = ProdutosDB.findProd(desc);
+        java.util.List<Produto> prodList = ProdutosDB.findProd(desc);
         
-        if ( cliList != null )
-            fill(cliList);
+        if ( prodList != null )
+            fill(prodList);
         
         tblProds.setEnabled(true);         
     }
@@ -189,6 +191,7 @@ public class ConsultaProdutoView extends javax.swing.JDialog {
     final int DESC         = 2;
     final int PRECO_COMPRA = 3;      
     final int PRECO_VENDA  = 4;      
+    final int ESTOQUE_QT   = 5;      
     
     private void fill(java.util.List<Produto> prodList)
     {
@@ -197,18 +200,24 @@ public class ConsultaProdutoView extends javax.swing.JDialog {
         for ( int i = 0; i < prodList.size(); i++ ){
             Produto prod = prodList.get(i);
             
+            //Obtendo informações do produto.
             final int cod      = prod.getCodigo();
             String codBarras   = prod.getCodBarras();
             String desc        = prod.getDescricao();
             double precoCompra = prod.getPrecoCompra();
             double precoVenda  = prod.getPrecoVenda();
-
-               
+            
+            //Obtendo o estoque do produto.
+            Estoque estoque    = EstoqueDB.find(cod);
+            int estoqueQt      = estoque.getQt();
+            
+            //Fixando as informações na tabela.   
             newModel.setValueAt(cod,         i, COD_PROD);
             newModel.setValueAt(codBarras,   i, COD_BARRAS);
             newModel.setValueAt(desc,        i, DESC);
             newModel.setValueAt(precoCompra, i, PRECO_COMPRA);
             newModel.setValueAt(precoVenda,  i, PRECO_VENDA);
+            newModel.setValueAt(estoqueQt,   i, ESTOQUE_QT);
 
         }
         
@@ -263,7 +272,8 @@ public class ConsultaProdutoView extends javax.swing.JDialog {
                                                           "Código de barras",
                                                           "Descrição",
                                                           "Preço de compra",
-                                                          "Preço de venda"
+                                                          "Preço de venda",
+                                                          "Estoque Qt."
                                                         };
     
     private final TableModel emptyProdModel = new XTableModel(new Object[0][prodCols.length], prodCols);    
@@ -282,6 +292,7 @@ public class ConsultaProdutoView extends javax.swing.JDialog {
         tblProds.setModel(emptyProdModel);
         tblProds.getColumnModel().getColumn(COD_PROD).setMinWidth(65);
         tblProds.getColumnModel().getColumn(COD_PROD).setMaxWidth(65);
+        tblProds.setDefaultRenderer(Object.class, Util.getDefaultCellRenderer());
     }      
     
     protected void afterConstruct()

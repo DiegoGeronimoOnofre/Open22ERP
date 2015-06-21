@@ -251,6 +251,8 @@ public class EstoqueView extends javax.swing.JDialog {
             
             if ( result ){
                 javax.swing.JOptionPane.showMessageDialog(null, "Estoque atualizado com sucesso.");
+                this.setVisible(false);
+                this.dispose();
             }
             else
                 javax.swing.JOptionPane.showMessageDialog(null, "Ocorreu um problema ao atualizar o estoque.\n"

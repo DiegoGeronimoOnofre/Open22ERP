@@ -60,11 +60,11 @@ public class MovDB {
             Connection con = DB.getConnection();
             Statement st = con.createStatement();
             
-            final int cod    = genCode();
-            final int codCli = mov.getCod_cli();
+            final int cod          = genCode();
+            final int codCli       = mov.getCod_cli();
             final int codPayMethod = mov.getPayMethodCode();
             final int movTypeCode  = mov.getMovType();
-            long time = System.currentTimeMillis();
+            long time              = System.currentTimeMillis();
             
             String update = " insert "
                           + " into mov "

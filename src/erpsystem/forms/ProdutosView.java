@@ -29,6 +29,7 @@ import static erpsystem.Util.*;
 import erpsystem.db.Produto;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -240,8 +241,8 @@ public class ProdutosView extends javax.swing.JFrame {
         return true;
     }
     
-    private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadActionPerformed
-        // TODO add your handling code here:
+    private void cadastrar()
+    {
         if ( validateFields() ){
             Produto prod = new Produto();
 
@@ -289,7 +290,12 @@ public class ProdutosView extends javax.swing.JFrame {
                 msg("Problema ao cadastrar o novo produto.\n"
                   + "Recomendável tentar novamente, se o problema \n"
                   + "persistir informe o Desenvolvedor.");
-        }
+        }    
+    }
+    
+    private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadActionPerformed
+        // TODO add your handling code here:
+        cadastrar();
     }//GEN-LAST:event_btnCadActionPerformed
 
     private void tfdPrecoCompraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdPrecoCompraKeyPressed
@@ -338,6 +344,11 @@ public class ProdutosView extends javax.swing.JFrame {
                 else{                 
                     tfdPrecoVenda.setBackground(new Color(150, 255, 150));
                     lblVendaValidator.setText("...");
+                    
+                    int keyCode = evt.getKeyCode();
+                    
+                    if (evt.isControlDown() && keyCode == KeyEvent.VK_ENTER)
+                        cadastrar();
                 }
             }
             else{

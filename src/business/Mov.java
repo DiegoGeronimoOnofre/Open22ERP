@@ -55,7 +55,7 @@ public class Mov {
                 for ( int i = 0; i < mpList.size(); i++ ){ 
                     MovProd mp = mpList.get(i);
                     mp.setCodMov(movCod);
-                    boolean result = MovProdDB.add(mp);
+                    boolean result = MovProdDB.add(mp, movTypeCode);
 
                     if (! result ){
                         return error;

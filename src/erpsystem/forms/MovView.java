@@ -29,12 +29,16 @@ import erpsystem.Util;
 import erpsystem.db.PayMethod;
 
 import static erpsystem.Util.*;
+import erpsystem.db.Estoque;
+import erpsystem.db.EstoqueDB;
 import erpsystem.db.MovProd;
 import erpsystem.db.Produto;
 import erpsystem.db.PessoasDB;
 import erpsystem.db.Pessoa;
 import erpsystem.db.ProdutosDB;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.ListSelectionModel;
@@ -42,7 +46,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 
 
@@ -468,9 +474,16 @@ public class MovView extends javax.swing.JFrame {
     
     private boolean validateFields()
     {
-        String codCli = tfdCodCli.getText();
-        String codProd = tfdCodProd.getText();
-        String qt = tfdQt.getText();
+        String codCli   = tfdCodCli.getText();
+        String codProd  = tfdCodProd.getText();
+        String qt       = tfdQt.getText();
+        String newPrice = tfdNovoPreco.getText();
+        
+        if (! newPrice.trim().equals("") && ! Util.isDouble(newPrice)){
+            msg("Valor unitário inválido. Exemplo 88.99");
+            tfdNovoPreco.grabFocus();
+            return false;
+        }
         
         if ( codCli.trim().equals("") ){
             msg("Por favor, preencha o código do cliente.");
@@ -555,9 +568,47 @@ public class MovView extends javax.swing.JFrame {
     static final int PRECO    = 3;
     static final int TOTAL    = 4;
     
+    private void setLockFields(boolean value)
+    {
+        Container contentPane = this.getContentPane();
+        Component[] compList = contentPane.getComponents();
+        int size = compList.length;
+        for ( int i = 0; i < size; i++ ){
+            Component comp = compList[i];
+            
+            if ( comp instanceof JTextField )
+                ( (JTextField) comp).setEnabled(!value);
+        }
+    }
+    
+    private static boolean temEstoque(int code, int paramQt){
+        Estoque estoque = EstoqueDB.find(code);
+        int qt = estoque.getQt();
+        
+        if ( qt - paramQt < 0 )
+            return false;
+        else
+            return true;
+    }
+    
+    private boolean eVenda()
+    {
+        String movType = (String) cbxMovType.getSelectedItem();
+
+        if ( movType.trim().toLowerCase().equals(COMPRA.trim().toLowerCase()) )
+            return false;
+        else if ( movType.trim().toLowerCase().equals(VENDA.trim().toLowerCase()) )
+            return true;
+        
+        RuntimeException e = new RuntimeException("Problema 4567898521");
+        Log.log(e);
+        throw e;
+    }
+
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         
+        setLockFields(true);
         if ( validateFields() ){
             
             String cod = tfdCodProd.getText();
@@ -568,43 +619,61 @@ public class MovView extends javax.swing.JFrame {
                 Produto prod = business.Produtos.find(icod);
 
                 if ( prod != null ){
-                    int rowCount  = oldModel.getRowCount();
-                    TableModel tm = new XTableModel(colNames, rowCount + 1);
+                    
+                    String msg = "Estoque do produto não suficiente \n"
+                               + "para esta quantidade. Deseja continuar\n"
+                               + "mesmo assim? O estoque ficará negativo.\n"
+                               + "";
+                    
+                    int confirm = JOptionPane.OK_OPTION;
+                    final int qt = Integer.parseInt(tfdQt.getText());
+                    
+                    if ( eVenda() && !temEstoque(icod,qt) )        
+                        confirm = JOptionPane.showConfirmDialog(null, 
+                                                                msg, 
+                                                               "Continuar?", 
+                                                               JOptionPane.OK_CANCEL_OPTION);
 
-                    fill(oldModel, tm);
+                    if ( confirm == JOptionPane.OK_OPTION ){
+                        int rowCount  = oldModel.getRowCount();
+                        TableModel tm = new XTableModel(colNames, rowCount + 1);
 
-                    tm.setValueAt(prod.getCodigo(), rowCount, COD_PROD);
-                    tm.setValueAt(prod.getDescricao(), rowCount, DESC);
+                        fill(oldModel, tm);
 
-                    int qt = Integer.parseInt(tfdQt.getText());
-                    tm.setValueAt(qt, rowCount, QT);
-                    
-                    
-                    //Obtendo o preço relativo ao tipo de movimentação.
-                    
-//------------------------------------------------------------------------------                    
-                    double preco = 0;
-                    String movType = (String) cbxMovType.getSelectedItem();
-                    
-                    if ( movType.trim().toLowerCase().equals(COMPRA.trim().toLowerCase()) )
-                        preco = prod.getPrecoCompra();
-                    else if ( movType.trim().toLowerCase().equals(VENDA.trim().toLowerCase()) )
-                        preco = prod.getPrecoVenda();
-                    
-//------------------------------------------------------------------------------                       
+                        tm.setValueAt(prod.getCodigo(), rowCount, COD_PROD);
+                        tm.setValueAt(prod.getDescricao(), rowCount, DESC);
 
-                    tm.setValueAt(preco, rowCount, PRECO);
+                        tm.setValueAt(qt, rowCount, QT);
 
-                    double total  =  qt * preco;
-                    tm.setValueAt(total, rowCount, TOTAL);
-                    
-                    tblProd.setModel(tm);
-                    tblProd.getColumnModel().getColumn(COD_PROD).setMinWidth(65); 
-                    tblProd.getColumnModel().getColumn(COD_PROD).setMaxWidth(65); 
-                    lockCli();
-                    calcTotalValue();
-                    updateMovInfo();
-                    initQt();
+                        //Definição do preço do produto.
+
+    //------------------------------------------------------------------------------                      
+                        double preco = 0;
+                        String newPrice = tfdNovoPreco.getText().trim();
+
+                        if (! newPrice.equals("") ){
+                            preco = Double.parseDouble(newPrice);
+                        }
+                        else{
+                            //Obtendo o preço relativo ao tipo de movimentação.                  
+
+                            preco = getRelativePrice(prod);
+    //------------------------------------------------------------------------------   
+                        }
+
+                        tm.setValueAt(preco, rowCount, PRECO);
+
+                        double total  =  qt * preco;
+                        tm.setValueAt(total, rowCount, TOTAL);
+                     
+                        tblProd.setModel(tm);
+                        tblProd.getColumnModel().getColumn(COD_PROD).setMinWidth(65); 
+                        tblProd.getColumnModel().getColumn(COD_PROD).setMaxWidth(65); 
+                        lockCli();
+                        calcTotalValue();
+                        updateMovInfo();
+                        initQt();
+                    }
                 }
                 else
                     msg("Código do produto não encontrado.");
@@ -612,8 +681,23 @@ public class MovView extends javax.swing.JFrame {
             else
                 msg("Produto informado já inserido.");
         }
+        setLockFields(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private double getRelativePrice(Produto prod)
+    {
+        double preco = 0;
+        String movType = (String) cbxMovType.getSelectedItem();
+
+        if ( movType.trim().toLowerCase().equals(COMPRA.trim().toLowerCase()) )
+            preco = prod.getPrecoCompra();
+        else if ( movType.trim().toLowerCase().equals(VENDA.trim().toLowerCase()) )
+            preco = prod.getPrecoVenda();    
+        
+        return preco;
+    }  
+        
+    
     private void initQt()
     {
         /*Adicionando o valor 1 em quantidade quando um
@@ -849,6 +933,9 @@ public class MovView extends javax.swing.JFrame {
     private void fillProd( Produto prod )
     {
         lblProdInfo.setText(prod.getSummary());   
+        double newPrice = getRelativePrice(prod);
+        String s = String.valueOf(newPrice);
+        tfdNovoPreco.setText(s);
     }
     
     private void tfdCodProdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdCodProdKeyPressed
@@ -928,6 +1015,7 @@ public class MovView extends javax.swing.JFrame {
         unlockCli();
         clearFields();
         tblProd.setModel(emptyModel);
+        tblProd.setDefaultRenderer(Object.class, Util.getDefaultCellRenderer()); 
     }
     
     /**

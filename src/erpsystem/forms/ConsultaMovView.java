@@ -414,6 +414,7 @@ public class ConsultaMovView extends javax.swing.JFrame {
         
         tblMovs.getColumnModel().getColumn(MOV_COD).setMinWidth(0);  
         tblMovs.getColumnModel().getColumn(MOV_COD).setMaxWidth(0);
+        tblMovs.setDefaultRenderer(Object.class, Util.getDefaultCellRenderer());
     }
     
     private void initTblProds()
@@ -425,6 +426,7 @@ public class ConsultaMovView extends javax.swing.JFrame {
         tblProds.setModel(emptyProdsModel);
         tblProds.getColumnModel().getColumn(COD_PROD).setMinWidth(65);
         tblProds.getColumnModel().getColumn(COD_PROD).setMaxWidth(65);
+        tblProds.setDefaultRenderer(Object.class, Util.getDefaultCellRenderer());
     }
     
     /**

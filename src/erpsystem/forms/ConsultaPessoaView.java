@@ -239,6 +239,7 @@ public class ConsultaPessoaView extends javax.swing.JFrame {
         tblClientes.setModel(emptyCliModel);
         tblClientes.getColumnModel().getColumn(COD_COL).setMinWidth(65);
         tblClientes.getColumnModel().getColumn(COD_COL).setMaxWidth(65);
+        tblClientes.setDefaultRenderer(Object.class, Util.getDefaultCellRenderer());
     }    
     
     /**

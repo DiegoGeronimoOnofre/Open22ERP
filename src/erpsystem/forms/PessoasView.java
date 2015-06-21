@@ -27,6 +27,7 @@ package erpsystem.forms;
 import erpsystem.Util;
 import static erpsystem.Util.*;
 import erpsystem.db.Pessoa;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 /**
@@ -88,6 +89,12 @@ public class PessoasView extends javax.swing.JFrame {
         lblEmail.setText("Email");
 
         lblLoc.setText("Localização");
+
+        tfdTel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfdTelKeyReleased(evt);
+            }
+        });
 
         lblTel.setText("Telefone");
 
@@ -194,14 +201,19 @@ public class PessoasView extends javax.swing.JFrame {
     private void btnCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadActionPerformed
         // TODO add your handling code here:
         
+        cadastrar();
+    }//GEN-LAST:event_btnCadActionPerformed
+
+    private void cadastrar()
+    {
         if ( validateFields() ){
             Pessoa cli = new Pessoa();
 
-            String nome = tfdNome.getText();
-            String cpf = tfdCpf.getText();
+            String nome  = tfdNome.getText();
+            String cpf   = tfdCpf.getText();
             String email = tfdEmail.getText();
-            String loc = tfdLoc.getText();
-            String tel = tfdTel.getText();
+            String loc   = tfdLoc.getText();
+            String tel   = tfdTel.getText();
 
             cli.setNome(nome);
             cli.setCpf(cpf);
@@ -209,7 +221,7 @@ public class PessoasView extends javax.swing.JFrame {
             cli.setLocalizacao(loc);
             cli.setTelefone(tel);
             boolean result = business.Pessoas.add(cli);
-            
+
             if ( result ){
                 msg("Nova pessoa cadastrada com sucesso.");
                 clearFields();
@@ -220,7 +232,16 @@ public class PessoasView extends javax.swing.JFrame {
                   + "Recomendável tentar novamente, se o problema \n"
                   + "persistir informe o desenvolvedor.");
         }
-    }//GEN-LAST:event_btnCadActionPerformed
+    }
+    
+    private void tfdTelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdTelKeyReleased
+        // TODO add your handling code here:
+        
+        int keyCode = evt.getKeyCode();
+                    
+        if (evt.isControlDown() && keyCode == KeyEvent.VK_ENTER)
+            cadastrar();
+    }//GEN-LAST:event_tfdTelKeyReleased
 
     /**
      * @param args the command line arguments

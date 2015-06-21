@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class MovProdDB {
     
-    public static boolean add(MovProd movProd)
+    public static boolean add(MovProd movProd, int movType)
     {
         try{
             Connection con = DB.getConnection();
@@ -60,8 +60,28 @@ public class MovProdDB {
                           + ")";
             
             st.executeUpdate(update);
-            con.commit();
-            return true;
+            
+            //Atualizando o estoque.
+            
+            Estoque estoque = new Estoque();
+            estoque.setCodProd(codProd);
+            
+            if ( movType == 1 )//compra
+                estoque.setQt(qt);
+            else//venda
+                estoque.setQt(-qt);
+                
+            boolean result = EstoqueDB.addEstoque(estoque);    
+            
+            if ( result ){
+                con.commit();
+                return true;
+            }
+            else{
+                con.rollback();
+                return false;
+            }
+            
         }
         catch ( SQLException e ){
             Log.log(e);

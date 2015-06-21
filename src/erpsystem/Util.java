@@ -28,6 +28,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import static javax.swing.JOptionPane.*;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -82,6 +84,12 @@ public class Util {
             return true;
         
         return false;
+    }
+    
+    public static DefaultTableCellRenderer getDefaultCellRenderer(){
+        DefaultTableCellRenderer cellRender = new DefaultTableCellRenderer();
+        cellRender.setHorizontalAlignment(SwingConstants.CENTER); 
+        return cellRender;
     }
     
 }
