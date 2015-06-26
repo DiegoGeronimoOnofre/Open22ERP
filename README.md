@@ -15,9 +15,4 @@ contribuir positivamente para o projeto, deixem sempre a criatividade como princ
 buscar soluções que permitam a evolução da sociedade, deixando sempre de lado o que é burocrático e difícil. Eu gosto muito de soluções criativas e inovadoras e acredito que união pode fazer um grande
 espetáculo. 
 
-Para entrar em contato comigo recomendo que use 
-o perfil do Facebook. O email diego@tecnologiadigital.net
-está desativado e por algum motivo não está sendo possível
-removê-lo.
-
 Perfil Facebook: https://www.facebook.com/diegogeronimoonofre
