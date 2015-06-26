@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author developer
+ * @author Diego
  */
 public class PayMethodView extends javax.swing.JDialog {
 

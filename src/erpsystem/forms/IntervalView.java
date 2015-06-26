@@ -33,7 +33,7 @@ import javax.swing.JComboBox;
 
 /**
  *
- * @author developer
+ * @author Diego
  */
 public class IntervalView extends javax.swing.JDialog {
 
