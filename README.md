@@ -13,6 +13,6 @@ ser deixada de lado, por isso, eu acredito que com ela é possível fazer coisas
 normalmente não aparecem quando queremos, mas quando menos esperamos, por conta disso, eu espero que todos que pretendem 
 contribuir positivamente para o projeto, deixem sempre a criatividade como principal prioridade, afinal, a cada dia precisamos
 buscar soluções que permitam a evolução da sociedade, deixando sempre de lado o que é burocrático e difícil. Eu gosto muito de soluções criativas e inovadoras e acredito que união pode fazer um grande
-espetáculo.
+espetáculo. 
 
 Perfil Facebook: https://www.facebook.com/diegogeronimoonofre
