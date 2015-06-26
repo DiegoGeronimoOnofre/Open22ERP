@@ -24,8 +24,11 @@
 
 package erpsystem.forms;
 
+import erpsystem.Log;
 import erpsystem.Util;
 import static erpsystem.Util.*;
+import erpsystem.db.Estoque;
+import erpsystem.db.EstoqueDB;
 import erpsystem.db.Produto;
 import java.awt.Color;
 import java.awt.Font;
@@ -280,6 +283,22 @@ public class ProdutosView extends javax.swing.JFrame {
                     EstoqueView estoqueView = new EstoqueView(null, true);
                     estoqueView.setCodProd(codProd);
                     estoqueView.setVisible(true);
+                }
+                else {
+                    int codProd = prod.getCodigo();
+                    Estoque estoque = new Estoque();
+                    estoque.setCodProd(codProd);
+                    estoque.setQt(0);
+                    
+                    if (!EstoqueDB.addEstoque(estoque)){
+                        try{
+                            throw new Exception("Problema ao adicionar estoque para o "
+                                              + "produto quando o mesmo é cadastrado");
+                        }
+                        catch ( Exception e ){
+                            Log.log(e);
+                        }
+                    }
                 }
                 
                 tfdCodBarras.grabFocus();

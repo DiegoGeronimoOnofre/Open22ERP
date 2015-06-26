@@ -54,8 +54,8 @@ public class MovProdDB {
                           + " into mov_prod "
                           + " values(" + codMov  + ","
                                        + codProd + ","
-                                       + qt      + ","
                                        + preco   + ","
+                                       + qt      + ","
                                        + total
                           + ")";
             

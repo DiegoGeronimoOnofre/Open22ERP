@@ -89,10 +89,18 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mniFaturamento">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Faturamento"/>
+                <Property name="text" type="java.lang.String" value="Faturamento por intervalo"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniFaturamentoActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mniFaturamentoDia">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Faturamento por dia"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniFaturamentoDiaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

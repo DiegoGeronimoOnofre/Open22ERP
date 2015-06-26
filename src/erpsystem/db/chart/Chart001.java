@@ -67,7 +67,7 @@ public class Chart001 {
         try{
             Connection conn = DB.getConnection();
             Statement st = conn.createStatement();
-            String sql = " select sum(coalesce(coalesce(mov_prod.preco) * coalesce(mov_prod.qt))) as 'compravalue'"
+            String sql = " select sum(coalesce(coalesce(mov_prod.preco) * coalesce(mov_prod.qt))) as 'vendavalue'"
                        + " from mov, mov_prod"
                        + " where mov.codigo = mov_prod.cod_mov"
                        + "   and mov.mov_type = 2"
@@ -76,7 +76,7 @@ public class Chart001 {
             ResultSet rs = st.executeQuery(sql);
             
             if ( rs.next()){
-                double value = rs.getDouble("compravalue");
+                double value = rs.getDouble("vendavalue");
                 return value;
             }
             else
@@ -90,8 +90,28 @@ public class Chart001 {
     
     public static Double getValorLucroEm(long initialDate, long finalDate)
     {
-        Double compra = getValorCompraEm(initialDate, finalDate);
-        Double venda = getValorVendaEm(initialDate, finalDate);
-        return venda - compra;
+        try{
+            Connection conn = DB.getConnection();
+            Statement st = conn.createStatement();
+            String sql = " select sum(coalesce(coalesce(mov_prod.preco) * coalesce(mov_prod.qt)) - ( coalesce(produtos.preco_compra) * mov_prod.qt )) as 'lucro'"
+                       + " from mov, mov_prod, produtos"
+                       + " where mov.codigo      = mov_prod.cod_mov"
+                       + "   and mov.mov_type    = 2"
+                       + "   and produtos.codigo = mov_prod.cod_prod"
+                       + "   and ( mov.mov_time >= " + initialDate + " and mov.mov_time <= " + finalDate + ")";
+            
+            ResultSet rs = st.executeQuery(sql);
+            
+            if ( rs.next()){
+                double value = rs.getDouble("lucro");
+                return value;
+            }
+            else
+                return null;
+        }
+        catch ( Exception e ){
+            Log.log(e);
+            return null;
+        }   
     }
 }

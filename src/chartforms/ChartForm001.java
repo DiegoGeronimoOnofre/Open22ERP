@@ -23,7 +23,9 @@
  */
 package chartforms;
 
-import erpsystem.chart.Chart001;
+import erpsystem.chart.Charts;
+import erpsystem.forms.IntervalView;
+
 import java.awt.image.BufferedImage;
 import java.util.Calendar;
 
@@ -42,18 +44,20 @@ public class ChartForm001 extends ChartForm{
         final int w = 1024;
         final int h = 768;
         
-        final int y = 2015;
-        final int m = 5; // O primeiro mês começa com 0, o segundo com 1...
-        final int d = 1;
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(y, m, d);
-        long initialDate = calendar.getTime().getTime();
-        long finalDate = System.currentTimeMillis();
+        IntervalView intervalView = new IntervalView(null, true);
+        intervalView.setVisible(true);
+        IntervalView.Params params = intervalView.getParams();
         
-        double compra = erpsystem.db.chart.Chart001.getValorCompraEm(initialDate, finalDate);
-        double venda = erpsystem.db.chart.Chart001.getValorVendaEm(initialDate, finalDate);
-        double lucro = erpsystem.db.chart.Chart001.getValorLucroEm(initialDate, finalDate);
-        BufferedImage image = Chart001.create001(w, h, compra, venda, lucro);
-        showChart(w, h, image);
+        if ( params != null ){
+
+            Calendar initialCalendar = params.getInitialCalendar();
+            Calendar finalCalendar = params.getFinalCalendar();
+
+            BufferedImage image = Charts.create001(w, 
+                                                   h,
+                                                   initialCalendar, 
+                                                   finalCalendar);
+            showChart(w, h, image);
+        }
     }
 }

@@ -3,14 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/db/MovDB.java</file>
-            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/db/ProdutosDB.java</file>
-            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/db/PessoaMov.java</file>
-            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/db/MovProdDB.java</file>
-            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/db/PayMethodDB.java</file>
-            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/db/PessoasDB.java</file>
-            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/forms/MovView.java</file>
-            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/db/EstoqueDB.java</file>
+            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/forms/MainFormView.java</file>
+            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/chartforms/ChartForm002.java</file>
+            <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/chart/Charts.java</file>
             <file>file:/home/developer/Área%20de%20Trabalho/Open22ERP/src/erpsystem/forms/IntervalView.java</file>
         </group>
     </open-files>

@@ -23,49 +23,38 @@
  */
 package chartforms;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import erpsystem.chart.Charts;
+import erpsystem.forms.IntervalView;
 import java.awt.image.BufferedImage;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
+import java.util.Calendar;
 
 /**
  *
  * @author Diego
  */
-public class ChartForm extends JDialog{
-    
-    final private JPanel pnlPanel = new JPanel()
+public class ChartForm002 extends ChartForm{
+    public ChartForm002()
     {
-        @Override 
-        public void paint(Graphics g)
-        {
-            super.paint(g);
-            g.drawImage(image, 0, 0, null);
-        }
-    };
-    
-    public ChartForm()
-    {
-        setModal(false);
-        pnlPanel.setLayout(new BorderLayout());
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new BorderLayout());
-        contentPane.add(pnlPanel, BorderLayout.CENTER);
+        this.setTitle("Histórico");
     }
     
-    private BufferedImage image = null;
-    
-    public void showChart(final int w, final int h, BufferedImage image)
+    public void createAndShow()
     {
-        this.image = image;
-        pnlPanel.setPreferredSize(new Dimension(w, h));
-        this.setSize(w, h + 25);
-        this.setLocationRelativeTo(null);
-        this.repaint();
-        pnlPanel.repaint();
-        this.setVisible(true);
+        final int w = 1024;
+        final int h = 768;    
+        
+        Calendar finalCalendar = Calendar.getInstance();
+        long time              = System.currentTimeMillis();
+        finalCalendar.setTimeInMillis(time);
+        Calendar initialCalendar = Calendar.getInstance();
+        initialCalendar.setTimeInMillis(time);
+        initialCalendar.add(Calendar.DAY_OF_MONTH, -8);
+        int interval = 1;
+        
+        BufferedImage image = Charts.create002(w, 
+                                               h,
+                                               initialCalendar,
+                                               interval);//Dia do mês
+        showChart(w, h, image);
     }
 }

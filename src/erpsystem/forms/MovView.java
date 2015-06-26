@@ -673,6 +673,7 @@ public class MovView extends javax.swing.JFrame {
                         calcTotalValue();
                         updateMovInfo();
                         initQt();
+                        tfdNovoPreco.setText("");
                     }
                 }
                 else
@@ -821,12 +822,12 @@ public class MovView extends javax.swing.JFrame {
     
     private void terminateMov()
     {
-        TableModel tm = tblProd.getModel();
+        TableModel tm                  = tblProd.getModel();
         java.util.List<MovProd> mpList = getItemList(tm);
-        String cod = tfdCodCli.getText();
-        int cliCod = Integer.parseInt(cod);
-        int payMethodCode = getPayMethodCode();
-        int movTypeCode = getMovType();
+        String cod                     = tfdCodCli.getText();
+        int cliCod                     = Integer.parseInt(cod);
+        int payMethodCode              = getPayMethodCode();
+        int movTypeCode                = getMovType();
         
         if ( movTypeCode != -1 ){
             String msg = business.Mov.persistMov(cliCod,payMethodCode, movTypeCode, mpList);

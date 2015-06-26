@@ -25,6 +25,7 @@
 package erpsystem.forms;
 
 import chartforms.ChartForm001;
+import chartforms.ChartForm002;
 import erpsystem.ERPSystem;
 import erpsystem.Log;
 import erpsystem.Util;
@@ -75,6 +76,7 @@ public class MainFormView extends javax.swing.JFrame {
         mniFindProd = new javax.swing.JMenuItem();
         mniCharts = new javax.swing.JMenu();
         mniFaturamento = new javax.swing.JMenuItem();
+        mniFaturamentoDia = new javax.swing.JMenuItem();
         mniAjuda = new javax.swing.JMenu();
         mniSobre = new javax.swing.JMenuItem();
         mniProjectLink = new javax.swing.JMenuItem();
@@ -156,13 +158,21 @@ public class MainFormView extends javax.swing.JFrame {
 
         mniCharts.setText("Gráficos");
 
-        mniFaturamento.setText("Faturamento");
+        mniFaturamento.setText("Faturamento por intervalo");
         mniFaturamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniFaturamentoActionPerformed(evt);
             }
         });
         mniCharts.add(mniFaturamento);
+
+        mniFaturamentoDia.setText("Faturamento por dia");
+        mniFaturamentoDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniFaturamentoDiaActionPerformed(evt);
+            }
+        });
+        mniCharts.add(mniFaturamentoDia);
 
         jMenuBar1.add(mniCharts);
 
@@ -334,6 +344,12 @@ public class MainFormView extends javax.swing.JFrame {
         view.setVisible(true);
     }//GEN-LAST:event_mniCadEstoqueActionPerformed
 
+    private void mniFaturamentoDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFaturamentoDiaActionPerformed
+        // TODO add your handling code here:
+        ChartForm002 chart = new ChartForm002();
+        chart.createAndShow();
+    }//GEN-LAST:event_mniFaturamentoDiaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -379,6 +395,7 @@ public class MainFormView extends javax.swing.JFrame {
     private javax.swing.JMenu mniCharts;
     private javax.swing.JMenu mniConsultas;
     private javax.swing.JMenuItem mniFaturamento;
+    private javax.swing.JMenuItem mniFaturamentoDia;
     private javax.swing.JMenuItem mniFindMov;
     private javax.swing.JMenuItem mniFindPessoa;
     private javax.swing.JMenuItem mniFindProd;
