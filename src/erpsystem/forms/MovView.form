@@ -216,7 +216,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblCodCli">
       <Properties>
-        <Property name="text" type="java.lang.String" value="C&#xf3;digo Cliente:"/>
+        <Property name="text" type="java.lang.String" value="C&#xf3;digo Pessoa:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdCodCli">

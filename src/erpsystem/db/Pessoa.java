@@ -95,6 +95,6 @@ public class Pessoa {
     
     public String getSummary()
     {
-        return "Cliente:'" + nome + "' CPF:'" + cpf + "'";
+        return "Pessoa:'" + nome + "' CPF:'" + cpf + "'";
     }
 }

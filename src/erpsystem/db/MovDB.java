@@ -98,7 +98,8 @@ public class MovDB {
                           + "        mov.cod_pay_method as 'paym'"
                           + " from mov, pessoas "
                           + " where mov.cod_cli = pessoas.codigo "
-                          + "   and upper(trim(pessoas.nome)) like '%" + pessoa.trim().toUpperCase() + "%'";
+                          + "   and upper(trim(pessoas.nome)) like '%" + pessoa.trim().toUpperCase() + "%'"
+                          + " order by mov.mov_time";
             
             ResultSet rs = st.executeQuery(update);
             List<PessoaMov> cmList = new ArrayList<>();

@@ -159,7 +159,7 @@ public class MovView extends javax.swing.JFrame {
             }
         });
 
-        lblCodCli.setText("Código Cliente:");
+        lblCodCli.setText("Código Pessoa:");
 
         tfdCodCli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

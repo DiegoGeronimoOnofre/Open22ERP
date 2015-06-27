@@ -36,7 +36,7 @@ CREATE TABLE `estoque` (
 
 LOCK TABLES `estoque` WRITE;
 /*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-INSERT INTO `estoque` VALUES (1,0),(2,0),(3,0);
+INSERT INTO `estoque` VALUES (1,101),(2,195),(3,317);
 /*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,6 +61,7 @@ CREATE TABLE `formaspagamento` (
 
 LOCK TABLES `formaspagamento` WRITE;
 /*!40000 ALTER TABLE `formaspagamento` DISABLE KEYS */;
+INSERT INTO `formaspagamento` VALUES (1,'A vista',30);
 /*!40000 ALTER TABLE `formaspagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,6 +92,7 @@ CREATE TABLE `mov` (
 
 LOCK TABLES `mov` WRITE;
 /*!40000 ALTER TABLE `mov` DISABLE KEYS */;
+INSERT INTO `mov` VALUES (1,1,1,1,1435441209921),(2,2,1,1,1435441298590),(3,3,1,1,1435441336262),(4,1,1,1,1435441454662),(5,2,1,1,1435441592254),(6,1,1,2,1435441693902),(7,3,1,2,1435441809510),(8,2,1,2,1435442094296),(9,1,1,2,1435442288955);
 /*!40000 ALTER TABLE `mov` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,6 +122,7 @@ CREATE TABLE `mov_prod` (
 
 LOCK TABLES `mov_prod` WRITE;
 /*!40000 ALTER TABLE `mov_prod` DISABLE KEYS */;
+INSERT INTO `mov_prod` VALUES (1,1,50.00,1,0.00),(1,2,100.00,2,0.00),(1,3,200.00,3,0.00),(2,1,50.00,1,0.00),(2,2,100.00,2,0.00),(3,1,50.00,1,0.00),(4,1,50.00,10,0.00),(4,2,100.00,20,0.00),(4,3,200.00,30,0.00),(5,1,50.00,100,0.00),(5,2,100.00,200,0.00),(5,3,200.00,300,0.00),(6,1,55.00,10,0.00),(6,2,110.00,15,0.00),(6,3,220.00,15,0.00),(7,1,55.00,1,0.00),(7,2,110.00,5,0.00),(8,2,110.00,8,0.00),(9,1,55.00,1,0.00),(9,2,110.00,1,0.00),(9,3,220.00,1,0.00);
 /*!40000 ALTER TABLE `mov_prod` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +150,7 @@ CREATE TABLE `pessoas` (
 
 LOCK TABLES `pessoas` WRITE;
 /*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
-INSERT INTO `pessoas` VALUES (1,'Primeira pessoa','cpf111','Email@111.com','loc111','tel111'),(2,'Segunda pessoa','cpf222','Email@222.com','loc222','tel222'),(3,'Terceira pessoa','cpf333','Email@333.com','loc333','tel333');
+INSERT INTO `pessoas` VALUES (1,'Pessoa1','xxx.842.117-70','contato@pessoa1.com','Cidade1, Estado1','(xx)1111-xxxx'),(2,'Pessoa2','xxx.346.564-88','contato@pessoa2.com','Cidade1, Estado1','(xx)2222-xxxx'),(3,'Pessoa3','xxx.047.394-02','contato@pessoa3.com','Cidade1, Estado1','(xx)3333-xxxx');
 /*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +177,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (1,'CB111','Primeiro produto',50.00,55.00),(2,'CB222','Segundo produto',30.00,33.00),(3,'CB333','Terceiro produto',100.00,110.00);
+INSERT INTO `produtos` VALUES (1,'7898357410015','Descrição Produto1',50.00,55.00),(2,'7898357410016','Descrição Produto2',100.00,110.00),(3,'7898357410017','Descrição Produto3',200.00,220.00);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -187,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-22 17:14:38
+-- Dump completed on 2015-06-27 20:18:44
