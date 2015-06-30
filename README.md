@@ -16,4 +16,5 @@ buscar soluções que permitam a evolução da sociedade, deixando sempre de lad
 espetáculo. 
 
 channel  https://www.youtube.com/user/cursostd
+
 facebook https://www.facebook.com/diegogeronimoonofre
