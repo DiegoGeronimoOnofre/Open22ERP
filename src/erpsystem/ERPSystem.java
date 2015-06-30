@@ -27,9 +27,13 @@ package erpsystem;
 import erpsystem.forms.MainFormView;
 
 /**
- *
- * @author Diego
- */
+*
+* @author Diego Geronimo Onofre
+* @channel https://www.youtube.com/user/cursostd
+* @facebook https://www.facebook.com/diegogeronimoonofre
+* @Github https://github.com/DiegoGeronimoOnofre
+*/
+
 public class ERPSystem {
     
     public static final String appName = "Open22ERP";

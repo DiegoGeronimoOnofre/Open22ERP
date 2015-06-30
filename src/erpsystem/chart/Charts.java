@@ -32,9 +32,13 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
- *
- * @author Diego
- */
+*
+* @author Diego Geronimo Onofre
+* @channel https://www.youtube.com/user/cursostd
+* @facebook https://www.facebook.com/diegogeronimoonofre
+* @Github https://github.com/DiegoGeronimoOnofre
+*/
+
 public class Charts {
     /**Gŕafico criado para mostrar 
     o faturamento considerando o 

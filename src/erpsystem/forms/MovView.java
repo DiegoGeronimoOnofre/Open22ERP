@@ -51,11 +51,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 
-
 /**
- *
- * @author Diego
- */
+*
+* @author Diego Geronimo Onofre
+* @channel https://www.youtube.com/user/cursostd
+* @facebook https://www.facebook.com/diegogeronimoonofre
+* @Github https://github.com/DiegoGeronimoOnofre
+*/
 public class MovView extends javax.swing.JFrame {
 
     /**
