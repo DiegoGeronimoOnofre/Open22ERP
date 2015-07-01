@@ -15,6 +15,6 @@ contribuir positivamente para o projeto, deixem sempre a criatividade como princ
 buscar soluções que permitam a evolução da sociedade, deixando sempre de lado o que é burocrático e difícil. Eu gosto muito de soluções criativas e inovadoras e acredito que união pode fazer um grande
 espetáculo. 
 
-channel  https://www.youtube.com/user/cursostd
+Perfil Facebook: https://www.facebook.com/diegogeronimoonofre
 
-facebook https://www.facebook.com/diegogeronimoonofre
+Canal Youtube: https://www.youtube.com/user/cursostd
