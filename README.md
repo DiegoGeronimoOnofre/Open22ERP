@@ -12,7 +12,7 @@ funcionalidade, terá pelo menos de ter conhecimento em Java SE e Mysql. A criat
 ser deixada de lado, por isso, eu acredito que com ela é possível fazer coisas incríveis. As melhores soluções, 
 normalmente não aparecem quando queremos, mas quando menos esperamos, por conta disso, eu espero que todos que pretendem 
 contribuir positivamente para o projeto, deixem sempre a criatividade como principal prioridade, afinal, a cada dia precisamos
-buscar soluções que permitam a evolução da sociedade, deixando sempre de lado o que é burocrático e difícil. Eu gosto muito de soluções criativas e inovadoras e acredito que união pode fazer um grande
+buscar soluções que permitam a evolução da sociedade, deixando sempre de lado o que é burocrático. Eu gosto muito de soluções criativas e inovadoras e acredito que união pode fazer um grande
 espetáculo. 
 
 Vídeo: https://www.youtube.com/watch?v=a_V6iS60usM
