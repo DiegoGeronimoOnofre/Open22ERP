@@ -40,7 +40,7 @@ import erpsystem.forms.MainFormView;
 public class ERPSystem {
     
     public static final String appName = "Open22ERP";
-
+    
     public static String getWorkDir()
     {
         return System.getProperty("user.dir");
