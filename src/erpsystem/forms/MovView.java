@@ -116,6 +116,10 @@ public class MovView extends javax.swing.JFrame {
         }
     }
     
+    /** O método initComponents é responsável por iniciar todos os valores de todos
+     * os componentes na janela.
+    */
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -432,7 +436,9 @@ public class MovView extends javax.swing.JFrame {
         
         /* ESTE PROJETO ESTÁ SENDO USADO ------> DefaultTableModel <------.
         Conforme o mesmo crescer, será necessário implementar 
-        o próprio TableModel.*/
+        o próprio TableModel. Mas isso não é problema para sistemas que não
+        possuem grander bancos de dados, e quando o sistema atingir este patamar,
+        o mesmo será adaptado para suprir as necessidade correspondentes.*/
 
         
         //Definição inicial de uma venda
@@ -687,6 +693,10 @@ public class MovView extends javax.swing.JFrame {
         setLockFields(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
+    /** Obtem o preço relacionado ao tipo de movimentação,
+     * se for de compra, então o método retorna preço de compra, se
+     * vende, então retorna venda.
+    */
     private double getRelativePrice(Produto prod)
     {
         double preco = 0;
@@ -738,6 +748,13 @@ public class MovView extends javax.swing.JFrame {
                 Log.log("Problema: 7743");
         }
     }
+    
+    /** O método abaixo é responsável por calcular o valor
+     * total da movimentação, considerando todos os produtos na
+     * tabela de produtos. Depois de ter feito todo o cálculo, o método
+     * atualiza esta informação na tela, para que o usuário tenha conhecimento
+     * sobre o valor total da venda.
+    */
     
     private void calcTotalValue()
     {
@@ -849,6 +866,12 @@ public class MovView extends javax.swing.JFrame {
         initMov();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    /** Obtem o cliente, considerando o código previamente digitado na tela
+     * de movimentações. Este método obtem o valor do campo de código da pessoa.
+     * logo depois faz uma pesquisa na banco de dados para obter as informações relacionadas
+     * a esta pessoa.
+    */
+
     private void findCli()
     {
         XConsultaClienteView c = new XConsultaClienteView()
@@ -872,6 +895,13 @@ public class MovView extends javax.swing.JFrame {
         // TODO add your handling code here:
         findCli();
     }//GEN-LAST:event_btnFindCliActionPerformed
+
+    /** Obtem o produto, considerando o código previamente digitado na tela
+     * de movimentações. Este método obtem o valor do campo de código do produto,
+     * logo depois faz uma pesquisa na banco de dados para obter as informações relacionadas
+     * a este produto, para posteriormente preencher as informações na tela, assim o usuário tem
+     * conhecimento de qual produto está vendendo ou comprando.
+    */
 
     private void findProd()
     {
@@ -903,6 +933,7 @@ public class MovView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tfdCodCliKeyTyped
 
+    //Preenche as informações do produto especificado na janela de movimentações
     private void fillCli(Pessoa cli)
     {
         lblCliInfo.setText(cli.getSummary());
@@ -933,6 +964,7 @@ public class MovView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfdCodCliKeyPressed
 
+    //Preenche as informações do produto especificado na janela de movimentações
     private void fillProd( Produto prod )
     {
         lblProdInfo.setText(prod.getSummary());   
@@ -1007,12 +1039,20 @@ public class MovView extends javax.swing.JFrame {
         initTotal();
     }
     
+    //Iniciando o valor total.
     private void initTotal()
     {
         lblTotal.setText("Total:");
         lblValorTotal.setText("R$ 00.00");
     }
     
+    //Método que inicia uma movimentação. Utilize este métod se precisa
+    //reiniciar a movimentação. Se precisa de que alguma coisa aconteça quando
+    //uma movimentação é iniciada, então é possível adicionar neste método, mas não
+    //alterando o que já está codificado. Faça isso se sabe o que está fazendo.
+    //Não se preocupe em errar, a aplicação deve ser testada antes de ir para ambiente de
+    //produção, mas sabendo usar o git, você terá a possibilidade de desfazer coisas que fez
+    //e não funcionou como esperava.
     private void initMov()
     {
         unlockCli();
@@ -1021,9 +1061,11 @@ public class MovView extends javax.swing.JFrame {
         tblProd.setDefaultRenderer(Object.class, Util.getDefaultCellRenderer()); 
     }
     
-    /**
-     * @param args the command line arguments
-     */
+    /** Este método main é utilizado somente enquanto a aplicação está sendo
+     * testada. Por isso, pode haver diferenças se está executando somente o arquivo
+     * ou toda a aplicação, já que o que está codificado nos métods main dos arquivos são
+     * diferentes do que está no arquivo principal da aplicação.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
