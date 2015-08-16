@@ -35,6 +35,9 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Diego
  */
+ 
+ //Este arquivo foi criado para suprir necessidade básicas.
+ //Método que podem ser utilizados para testar se uma String é um número e outros.
 public class Util {
 
     public static void msg(String s)
@@ -42,6 +45,7 @@ public class Util {
         showMessageDialog(null, s);
     }
     
+    //Verifica se é um valor inteiro válido.
     public static boolean isInt(String value)
     {
         try{
@@ -53,6 +57,7 @@ public class Util {
         }
     }
     
+    //Verifica se é um Double válido.
     public static boolean isDouble(String value)
     {
         try{
@@ -64,6 +69,8 @@ public class Util {
         }
     }
     
+    /**Utilize este método para ter o Point que adiciona o a Janela no centro.
+    */
     public static Point getCenterPoint( final int w, final int h )
     {
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -73,6 +80,8 @@ public class Util {
         return new Point( x, y );
     }     
     
+    /** Verifica se o char é de valor de preço.
+    */
     public static boolean isValidPriceChar(char charValue)
     {
         String s =  String.valueOf(charValue);
