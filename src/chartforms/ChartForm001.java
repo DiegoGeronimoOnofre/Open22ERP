@@ -50,13 +50,16 @@ public class ChartForm001 extends ChartForm{
         
         if ( params != null ){
 
+            //Obtendo as datas iniciais e finais.
             Calendar initialCalendar = params.getInitialCalendar();
             Calendar finalCalendar = params.getFinalCalendar();
 
+            //Cria o gráfico como um mapa de pixels.
             BufferedImage image = Charts.create001(w, 
                                                    h,
                                                    initialCalendar, 
                                                    finalCalendar);
+            //Mostra o gráfico na janela de observação.                                       
             showChart(w, h, image);
         }
     }
