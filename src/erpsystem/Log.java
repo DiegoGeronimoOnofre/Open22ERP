@@ -33,6 +33,9 @@ import java.nio.charset.Charset;
  *
  * @author Diego
  */
+ 
+ //Este arquivo foi criar para facilitar a geração de logs no sistema
+ 
 public class Log {
     private static final Charset encoding = Charset.forName("UTF8");
     
@@ -101,11 +104,14 @@ public class Log {
         return s;
     }
     
+    //Este método pode ser usado para mostrar uma mensagem na saída.
     public static void log(Object s)
     {
         System.out.println(s);
     }
     
+    //Este método pode ser usado para mostrar uma mensagem na saída, mas
+    //Também armazena esta mensagem, para posteriormente seja possível ter acesso a ela.
     public static void log(Exception e)
     {
         System.out.println(e.toString());
