@@ -442,7 +442,7 @@ public class MovView extends javax.swing.JFrame {
         /* ESTE PROJETO ESTÁ SENDO USADO ------> DefaultTableModel <------.
         Conforme o mesmo crescer, será necessário implementar 
         o próprio TableModel. Mas isso não é problema para sistemas que não
-        possuem grander bancos de dados, e quando o sistema atingir este patamar,
+        possuem grandes bancos de dados, e quando o sistema atingir este patamar,
         o mesmo será adaptado para suprir as necessidade correspondentes.*/
 
         
