@@ -46,6 +46,10 @@ public class ERPSystem {
         return System.getProperty("user.dir");
     }
     
+    /**O método abaixo é executado quando a aplicação e iniciada.
+    Utilize o método abaixo se tem a necessidade de adicionar algum código
+    para iniciar junto a aplicação. Talvez alguma configuração inicial.
+    */
     public static void main(String[] args) {
         // TODO code application logic here
         
