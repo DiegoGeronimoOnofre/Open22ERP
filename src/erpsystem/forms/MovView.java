@@ -58,6 +58,9 @@ import javax.swing.SwingConstants;
 * @facebook https://www.facebook.com/diegogeronimoonofre
 * @Github https://github.com/DiegoGeronimoOnofre
 */
+
+/** Nesta janela há toda a implementação da janela que possibilita gerar movimentações.
+*/
 public class MovView extends javax.swing.JFrame {
 
     /**
@@ -117,7 +120,9 @@ public class MovView extends javax.swing.JFrame {
     }
     
     /** O método initComponents é responsável por iniciar todos os valores de todos
-     * os componentes na janela.
+     * os componentes na janela. Como esta aplicação foi desenvolvida usando o formbuilder do
+     * netbeans, então é recomendável não alterar este código se quer que a aplicação continue
+     * funcionando.
     */
     
     /**
@@ -480,6 +485,12 @@ public class MovView extends javax.swing.JFrame {
         return false;
     }
     
+    /**Método que verifica se os valores preenchidos nos campos são válidos.
+     * Se o método detectar que há valores incorretos, então mostra a mensagem
+     * correspondente, logo depois retorna um boolean que indica se os campos são 
+     * ou não são válidos.
+    */
+    
     private boolean validateFields()
     {
         String codCli   = tfdCodCli.getText();
@@ -544,6 +555,8 @@ public class MovView extends javax.swing.JFrame {
     
     private boolean lockCli = false;
     
+    //Use o método abaixo se quer bloquear as informações do cliente, ou
+    //seja impedir que o usuário altere. 
     private void lockCli()
     {
         tfdCodCli.setEditable(false);
@@ -557,6 +570,8 @@ public class MovView extends javax.swing.JFrame {
         lockCli = true;
     }
     
+    //Para desbloquear as informações do cliente, assim é possível, novamente
+    //editar as informações do cliente, se este método for invocado.
     private void unlockCli()
     {
         tfdCodCli.setEditable(true);
@@ -576,6 +591,10 @@ public class MovView extends javax.swing.JFrame {
     static final int PRECO    = 3;
     static final int TOTAL    = 4;
     
+    /** Utilize este método para bloquear ou desbloquear todos os campos
+     * da janela de movimentações. Fazendo isso os valores não poderão
+     * ser alterados se o parâmetro for true. Use false para desbloquear.
+    */
     private void setLockFields(boolean value)
     {
         Container contentPane = this.getContentPane();
@@ -589,6 +608,11 @@ public class MovView extends javax.swing.JFrame {
         }
     }
     
+    //Com o método abaixo você pode saber se tem estoque, a partir
+    //do código do produto informado. Ou seja este método diz se será
+    // possível adicionar o produto na tabela de produtos da movimentação
+    //considerando a quantidade informada no parâmetro paramQt. Se for suficiente, 
+    //o método retorna true, senão retorna false.
     private static boolean temEstoque(int code, int paramQt){
         Estoque estoque = EstoqueDB.find(code);
         int qt = estoque.getQt();
@@ -598,7 +622,7 @@ public class MovView extends javax.swing.JFrame {
         else
             return true;
     }
-    
+    //Verifica se é uma venda, se for retorna true.
     private boolean eVenda()
     {
         String movType = (String) cbxMovType.getSelectedItem();
@@ -616,6 +640,8 @@ public class MovView extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         
+        //Bloqueando os campos enquanto o processo a movimentação está sendo gerada,
+        //para evitar que alguma informação seja alterada durante o processo.
         setLockFields(true);
         if ( validateFields() ){
             
@@ -690,6 +716,7 @@ public class MovView extends javax.swing.JFrame {
             else
                 msg("Produto informado já inserido.");
         }
+        //Desbloqueando os campos, permitindo assim, novamente que seja possível editá-los.
         setLockFields(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -839,6 +866,7 @@ public class MovView extends javax.swing.JFrame {
         return MovView.getMovType(s);
     }
     
+    //Finaliza a movimentação em questão, logo depois, permite que novas sejam geradas.
     private void terminateMov()
     {
         TableModel tm                  = tblProd.getModel();
@@ -1027,6 +1055,7 @@ public class MovView extends javax.swing.JFrame {
         return tblProd.getModel().getRowCount() == 0;
     }
     
+    //Limpa todos os campos.
     private void clearFields()
     {
         tfdCodCli.setText("");
