@@ -34,6 +34,9 @@ import erpsystem.forms.MainFormView;
 * @Github https://github.com/DiegoGeronimoOnofre
 */
 
+/**Arquivo principal da aplicação.
+*/
+
 public class ERPSystem {
     
     public static final String appName = "Open22ERP";
@@ -49,6 +52,9 @@ public class ERPSystem {
     public static void main(String[] args) {
         // TODO code application logic here
         
+        //Abaixo está sendo invocado o a janela principal da aplicação
+        //Onde será possível ter acesso a todas as funcionadades do sistema,
+        //como consulta movimentações, gráficos de faturamento e outros.
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFormView().setVisible(true);               
