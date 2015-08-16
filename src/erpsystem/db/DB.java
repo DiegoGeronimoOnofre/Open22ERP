@@ -34,6 +34,8 @@ import java.sql.*;
 public class DB {
     static {
         try{
+            //Carregando o drive. Este drive é o intermediário 
+            //entre a aplicação e o servidor de banco de dados.
             Class.forName("com.mysql.jdbc.Driver");
         }
         catch ( Exception e ){
@@ -48,9 +50,13 @@ public class DB {
         try{
             
             if ( con == null ){
+                //Abaixo há o código responsável por obter uma conexão com o banco de dados
                 con = DriverManager.getConnection( "jdbc:mysql://192.168.1.2/db", 
                                                     "root", 
                                                     "admin" );
+                //Para não permitir que o gerenciador da conexão faça auto commits,
+                //Isso, porque se um commit é feito na hora errada, pode ocorrer problemas,
+                //Considero melhor o próprio programador fazer o commit manualmente.
                 con.setAutoCommit(false);
                 return con;
             }
@@ -58,6 +64,7 @@ public class DB {
                 return con;
         }
         catch ( Exception e ){
+            //Gerando um log se algum problema ocorrer.
             Log.log(e);
             return null;
         }
