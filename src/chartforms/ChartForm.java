@@ -35,8 +35,21 @@ import javax.swing.JPanel;
  *
  * @author Diego
  */
+ 
+ /**
+ ChartForm é a classe padrão utilizada a geração de gráficos.
+ Com esta classe você terá uma janela para observação do gráfico,
+ mas não um gráfico já criado, para isso é necessário extender esta classe
+ e depois criar algum gráfico efetivo com a lib JFreeChart.
+ Na classe Charts deste projeto, há alguns métodos que retornam um BufferedImage(Imagem em memória),
+ que na verdade é o gráfico em forma de pixels. Assim sendo, tendo esta imagem do gráfico,
+ pode alterar a janela de visualização com o objetivo de aprendizado, mas se está adicionando
+ um novo gráfico no sistema, poderá sem problemas algum continuar utilizando esta janela de observação,
+ invocando o método showChart, passando o BufferedImage e a resolução.
+ */
 public class ChartForm extends JDialog{
     
+    //Quadro de observação do gráfico.
     final private JPanel pnlPanel = new JPanel()
     {
         @Override 
@@ -47,6 +60,8 @@ public class ChartForm extends JDialog{
         }
     };
     
+    /**Construtor principal
+    */
     public ChartForm()
     {
         setModal(false);
@@ -58,6 +73,9 @@ public class ChartForm extends JDialog{
     
     private BufferedImage image = null;
     
+    /**Utilize este método para criar um gráfico, passando os parâmetros.
+    O BufferedImage é o gráfico em formato de pixels.
+    */
     public void showChart(final int w, final int h, BufferedImage image)
     {
         this.image = image;
