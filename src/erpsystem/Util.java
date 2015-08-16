@@ -36,8 +36,8 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author Diego
  */
  
- //Este arquivo foi criado para suprir necessidade básicas.
- //Método que podem ser utilizados para testar se uma String é um número e outros.
+ //Este arquivo foi criado para suprir necessidades básicas.
+ //Métodos que podem serem utilizados para testar se uma String é um número e outros.
 public class Util {
 
     public static void msg(String s)
