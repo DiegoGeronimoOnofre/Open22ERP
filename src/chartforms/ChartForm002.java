@@ -51,10 +51,12 @@ public class ChartForm002 extends ChartForm{
         initialCalendar.add(Calendar.DAY_OF_MONTH, -8);
         int interval = 1;
         
+        //Cria o gráfico em formato de pixels.
         BufferedImage image = Charts.create002(w, 
                                                h,
                                                initialCalendar,
                                                interval);//Dia do mês
+        //Mostra o gráfico na janela de observação.                                       
         showChart(w, h, image);
     }
 }
