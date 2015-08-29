@@ -80,7 +80,7 @@ public class ChartForm extends JDialog{
     {
         this.image = image;
         pnlPanel.setPreferredSize(new Dimension(w, h));
-        this.setSize(w, h + 25);
+        this.setSize(w, h + 40);
         this.setLocationRelativeTo(null);
         this.repaint();
         pnlPanel.repaint();

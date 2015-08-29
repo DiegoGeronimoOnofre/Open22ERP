@@ -41,8 +41,8 @@ public class ChartForm001 extends ChartForm{
     
     public void createAndShow()
     {
-        final int w = 1024;
-        final int h = 768;
+        final int w = 800;
+        final int h = 600;
         
         IntervalView intervalView = new IntervalView(null, true);
         intervalView.setVisible(true);

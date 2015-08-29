@@ -105,33 +105,56 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mniAjuda">
+        <Menu class="javax.swing.JMenu" name="mniLinkedin">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ajuda"/>
+            <Property name="text" type="java.lang.String" value="Linkedin"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mniSobre">
+            <MenuItem class="javax.swing.JMenuItem" name="mniLinkedinDiego">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sobre"/>
+                <Property name="text" type="java.lang.String" value="Linkedin Diego"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniSobreActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniLinkedinDiegoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mniProjectLink">
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mniParticipe">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fa&#xe7;a Parte!"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mniDesenvolvedor">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Open22ERP no Github"/>
+                <Property name="text" type="java.lang.String" value="Desenvolvedor"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniProjectLinkActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniDesenvolvedorActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mniSite">
+            <MenuItem class="javax.swing.JMenuItem" name="mniInvestidor">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Site do Projeto"/>
+                <Property name="text" type="java.lang.String" value="Investidor"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniSiteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniInvestidorActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mniColaborador">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Colaborador"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniColaboradorActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mniNetworkingSolucoes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Networking de Solu&#xe7;&#xf5;es"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniNetworkingSolucoesActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

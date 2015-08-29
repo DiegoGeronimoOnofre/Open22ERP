@@ -51,7 +51,7 @@ public class DB {
             
             if ( con == null ){
                 //Abaixo há o código responsável por obter uma conexão com o banco de dados
-                con = DriverManager.getConnection( "jdbc:mysql://192.168.1.2/db", 
+                con = DriverManager.getConnection( "jdbc:mysql://localhost/db", 
                                                     "root", 
                                                     "admin" );
                 //Para não permitir que o gerenciador da conexão faça auto commits,

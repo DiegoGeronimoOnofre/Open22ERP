@@ -40,8 +40,8 @@ public class ChartForm002 extends ChartForm{
     
     public void createAndShow()
     {
-        final int w = 1024;
-        final int h = 768;    
+        final int w = 800;
+        final int h = 600;    
         
         Calendar finalCalendar = Calendar.getInstance();
         long time              = System.currentTimeMillis();
