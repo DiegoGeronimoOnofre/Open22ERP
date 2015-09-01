@@ -7,8 +7,7 @@ chave quando se fala em Open22ERP, por que os Desenvolvedores que querem partici
 projeto terão liberdade para escolher as melhores formas de solucionar problemas específicos
 de outras empresas que precisam de uma solução ERP. Para os Programadores que gostariam de participar
 do projeto seja adicionando uma nova função, testando, trazendo ideias sobre o que pode ser adicionado ou
-compartilhando para quem precisa, será bem vindo. Para quem pretende contribuir com o projeto adicionando novas 
-funcionalidade, terá pelo menos de ter conhecimento em Java SE e Mysql. A criatividade é sempre bem vinda, e nunca pode
+compartilhando para quem precisa, será bem vindo.  A criatividade é sempre bem vinda, e nunca pode
 ser deixada de lado, por isso, eu acredito que com ela é possível fazer coisas incríveis. As melhores soluções, 
 normalmente não aparecem quando queremos, mas quando menos esperamos, por conta disso, eu espero que todos que pretendem 
 contribuir positivamente para o projeto, deixem sempre a criatividade como principal prioridade, afinal, a cada dia precisamos
