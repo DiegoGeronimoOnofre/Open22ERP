@@ -9,3 +9,12 @@ Vídeo: https://www.youtube.com/watch?v=a_V6iS60usM
 Perfil Facebook: https://www.facebook.com/diegogeronimoonofre
 
 Linkedin: https://www.linkedin.com/in/diegogeronimoonofre
+
+<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+<form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post">
+<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+<input type="hidden" name="currency" value="BRL" />
+<input type="hidden" name="receiverEmail" value="infodiegoti@gmail.com" />
+<input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/doacoes/120x53-doar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+</form>
+<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
