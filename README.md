@@ -9,5 +9,4 @@ Olá, amigo, está procurando uma namorada nova ou quer surpreender a atual? Ent
 Link para a Loja:https://online.hinode.com.br/index1.asp
 ID do consultor:01346735
 
-Para mais informações, entre em contato comigo pelo Whatsapp.
-Whatsapp (44) 91675521
+Para mais informações, entre em contato comigo pelo Whatsapp. (44) 91675521
