@@ -4,7 +4,9 @@ Open22ERP é um sistema para gestão comercial open source com licença MIT dese
 
 A criatividade é sempre bem vinda, e nunca pode ser deixada de lado, por isso, eu acredito que com ela é possível fazer coisas incríveis. As melhores soluções, normalmente não aparecem quando queremos, mas quando menos esperamos, por conta disso, eu espero que todos que pretendem contribuir positivamente para o projeto, deixem sempre a criatividade como principal prioridade, afinal, a cada dia precisamos buscar soluções que permitam a evolução da sociedade, deixando sempre de lado o que é burocrático. Eu gosto muito de soluções criativas e inovadoras e acredito que união pode fazer toda a diferença.
 
-Vídeo: https://www.youtube.com/watch?v=a_V6iS60usM
+Quer perfumes de alta qualidade? Então acesse a loja abaixo.
+LInk para a Loja:https://online.hinode.com.br/index1.asp
+ID do consultor:01346735
 
 Perfil Facebook: https://www.facebook.com/diegogeronimoonofre
 
